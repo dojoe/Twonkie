@@ -1,0 +1,11 @@
+;LEADER: 12 
+;HEADER: 
+;CODE  : ASCII 
+;FILE  : ncdrill-1-6-np.drl for  ... layers TOP and BOTTOM
+;DESIGN: 180-10114-04.brd
+;T03 Holesize 1. = 0.650000 Tolerance = +0.076000/-0.076000 NON_PLATED MM Quantity = 1
+%
+G90
+T03
+X13415000Y9402500
+M30
