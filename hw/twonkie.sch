@@ -472,14 +472,14 @@ F 3 "" H 4700 950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Switch:SW_MEC_5E SW1
+L Switch:SW_Push SW1
 U 1 1 5FAB092D
-P 7700 3300
-F 0 "SW1" H 7700 3685 50  0000 C CNN
-F 1 "TACT" H 7700 3594 50  0000 C CNN
-F 2 "Button_Switch_SMD:SW_SPST_Omron_B3FS-100xP" H 7700 3600 50  0001 C CNN
-F 3 "http://www.apem.com/int/index.php?controller=attachment&id_attachment=1371" H 7700 3600 50  0001 C CNN
-	1    7700 3300
+P 7500 3200
+F 0 "SW1" H 7500 3400 50  0000 C CNN
+F 1 "TACT" H 7500 3100 50  0000 C CNN
+F 2 "Button_Switch_SMD:SW_SPST_EVQP7C" H 7500 3500 50  0001 C CNN
+F 3 "http://www.apem.com/int/index.php?controller=attachment&id_attachment=1371" H 7500 3500 50  0001 C CNN
+	1    7500 3200
 	-1   0    0    -1  
 $EndComp
 $Comp
@@ -820,13 +820,13 @@ Wire Wire Line
 	8400 4750 7500 4750
 Wire Wire Line
 	7500 4850 8400 4850
-Text Label 7500 4550 0    50   ~ 0
+Text Label 7500 5750 0    50   ~ 0
 CC2_RPUSB
-Text Label 7500 4650 0    50   ~ 0
+Text Label 10500 5950 2    50   ~ 0
 CC1_TX_EN
 Text Label 7500 4750 0    50   ~ 0
 VBUS_ALERT_L
-Text Label 7500 4850 0    50   ~ 0
+Text Label 7500 4150 0    50   ~ 0
 CC2_TX_EN
 Wire Wire Line
 	8400 4950 7500 4950
@@ -836,9 +836,9 @@ Wire Wire Line
 	8400 5150 7500 5150
 Wire Wire Line
 	7500 5250 8400 5250
-Text Label 7500 4950 0    50   ~ 0
+Text Label 10500 6050 2    50   ~ 0
 CC1_TX_DATA
-Text Label 7500 5050 0    50   ~ 0
+Text Label 7500 4950 0    50   ~ 0
 CC1_RD
 Text Label 7500 5150 0    50   ~ 0
 INA_SCL
@@ -850,23 +850,21 @@ Wire Wire Line
 	7500 5450 8400 5450
 Wire Wire Line
 	7500 5650 8400 5650
-Text Label 7500 5350 0    50   ~ 0
+Text Label 10500 5350 2    50   ~ 0
 CC2_RD
 Text Label 7500 5450 0    50   ~ 0
 TX_CLK
 Text Label 7500 5650 0    50   ~ 0
-LED_G_L
+LED_R_L
 Wire Wire Line
 	7500 5850 8400 5850
 Wire Wire Line
 	8400 5950 7500 5950
 Wire Wire Line
 	7500 6050 8400 6050
-Text Label 7500 5850 0    50   ~ 0
-LED_R_L
 Text Label 7500 5950 0    50   ~ 0
 LED_B_L
-Text Label 7500 6050 0    50   ~ 0
+Text Label 10500 5850 2    50   ~ 0
 CC2_RA
 Wire Wire Line
 	9600 4550 10500 4550
@@ -896,7 +894,7 @@ Text Label 10500 4950 2    50   ~ 0
 DAC
 Text Label 10500 5050 2    50   ~ 0
 TX_CLK
-Text Label 10500 5150 2    50   ~ 0
+Text Label 7500 4350 0    50   ~ 0
 CC2_TX_DATA
 Text Label 10500 5250 2    50   ~ 0
 VCONN_ALERT_L
@@ -908,7 +906,7 @@ Wire Wire Line
 	9600 5550 10500 5550
 Wire Wire Line
 	10500 5650 9600 5650
-Text Label 10500 5350 2    50   ~ 0
+Text Label 7500 4850 0    50   ~ 0
 CC1_RA
 Text Label 10500 5450 2    50   ~ 0
 UART_TX
@@ -926,11 +924,9 @@ Wire Wire Line
 	10500 6050 9600 6050
 Text Label 10500 5750 2    50   ~ 0
 USB_B_D+
-Text Label 10500 5850 2    50   ~ 0
-CC1_RPUSB
-Text Label 10500 5950 2    50   ~ 0
+Text Label 7500 5350 0    50   ~ 0
 CC1_RP1A5
-Text Label 10500 6050 2    50   ~ 0
+Text Label 7500 5050 0    50   ~ 0
 CC1_RP3A0
 Wire Wire Line
 	8400 3550 7500 3550
@@ -942,32 +938,26 @@ U 1 1 5FE22EC0
 P 7500 3550
 F 0 "TP5" V 7500 3800 50  0000 C CNN
 F 1 "TestPoint" V 7604 3622 50  0001 C CNN
-F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 7700 3550 50  0001 C CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 7700 3550 50  0001 C CNN
 F 3 "~" H 7700 3550 50  0001 C CNN
 	1    7500 3550
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	7500 3300 7500 3200
-Connection ~ 7500 3200
-Wire Wire Line
-	7900 3300 7900 3200
 $Comp
 L power:GND #PWR0124
 U 1 1 5FE51FD2
-P 7900 3300
-F 0 "#PWR0124" H 7900 3050 50  0001 C CNN
-F 1 "GND" H 7905 3127 50  0000 C CNN
-F 2 "" H 7900 3300 50  0001 C CNN
-F 3 "" H 7900 3300 50  0001 C CNN
-	1    7900 3300
+P 7700 3200
+F 0 "#PWR0124" H 7700 2950 50  0001 C CNN
+F 1 "GND" H 7705 3027 50  0000 C CNN
+F 2 "" H 7700 3200 50  0001 C CNN
+F 3 "" H 7700 3200 50  0001 C CNN
+	1    7700 3200
 	-1   0    0    -1  
 $EndComp
-Connection ~ 7900 3300
 Wire Wire Line
 	7100 3950 8400 3950
 Wire Wire Line
-	7500 3200 7100 3200
+	7300 3200 7100 3200
 $Comp
 L power:+3V3 #PWR0125
 U 1 1 5FE52452
@@ -996,7 +986,7 @@ U 1 1 5FE60C7A
 P 7500 3750
 F 0 "TP1" V 7500 4000 50  0000 C CNN
 F 1 "TestPoint" V 7604 3822 50  0001 C CNN
-F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 7700 3750 50  0001 C CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 7700 3750 50  0001 C CNN
 F 3 "~" H 7700 3750 50  0001 C CNN
 	1    7500 3750
 	0    -1   -1   0   
@@ -1007,7 +997,7 @@ U 1 1 5FE60F1E
 P 7500 3850
 F 0 "TP2" V 7500 4100 50  0000 C CNN
 F 1 "TestPoint" V 7604 3922 50  0001 C CNN
-F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 7700 3850 50  0001 C CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 7700 3850 50  0001 C CNN
 F 3 "~" H 7700 3850 50  0001 C CNN
 	1    7500 3850
 	0    -1   -1   0   
@@ -1018,27 +1008,21 @@ Wire Wire Line
 	8400 4250 7500 4250
 Wire Wire Line
 	8400 4150 7500 4150
-Text Label 7500 4250 0    50   ~ 0
-CC2_RP1A5
-Text Label 7500 4350 0    50   ~ 0
+Text Label 7500 6050 0    50   ~ 0
 CC2_RP3A0
 Wire Wire Line
 	8400 5550 7500 5550
 Wire Wire Line
 	8400 5750 7500 5750
-Text Label 7500 5750 0    50   ~ 0
-PB12
 Text Label 7500 5550 0    50   ~ 0
-PB10
-Text Label 7500 4150 0    50   ~ 0
-PC13
+LED_G_L
 $Comp
 L Connector:TestPoint TP3
 U 1 1 5FEEE9C1
 P 10500 5450
 F 0 "TP3" V 10500 5700 50  0000 C CNN
 F 1 "TestPoint" V 10604 5522 50  0001 C CNN
-F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 10700 5450 50  0001 C CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 10700 5450 50  0001 C CNN
 F 3 "~" H 10700 5450 50  0001 C CNN
 	1    10500 5450
 	0    1    1    0   
@@ -1049,7 +1033,7 @@ U 1 1 5FEEFA7D
 P 10500 5550
 F 0 "TP4" V 10500 5800 50  0000 C CNN
 F 1 "TestPoint" V 10604 5622 50  0001 C CNN
-F 2 "TestPoint:TestPoint_Pad_D1.5mm" H 10700 5550 50  0001 C CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 10700 5550 50  0001 C CNN
 F 3 "~" H 10700 5550 50  0001 C CNN
 	1    10500 5550
 	0    1    1    0   
@@ -1539,9 +1523,6 @@ F 3 "~" H 3100 950 50  0001 C CNN
 	1    3100 950 
 	-1   0    0    1   
 $EndComp
-NoConn ~ 7500 4150
-NoConn ~ 7500 5550
-NoConn ~ 7500 5750
 NoConn ~ 10500 4950
 NoConn ~ 4600 7300
 $Comp
@@ -1709,4 +1690,8 @@ F 3 "" H 1000 6150 50  0001 C CNN
 	1    1000 6150
 	1    0    0    -1  
 $EndComp
+Text Label 7500 5850 0    50   ~ 0
+CC2_RP1A5
+Text Label 7500 4250 0    50   ~ 0
+CC1_RPUSB
 $EndSCHEMATC
