@@ -1017,10 +1017,10 @@ Wire Wire Line
 Text Label 7500 3550 0    50   ~ 0
 NRST
 $Comp
-L Connector:TestPoint TP5
+L Connector:TestPoint TP1
 U 1 1 5FE22EC0
 P 7500 3550
-F 0 "TP5" V 7500 3800 50  0000 C CNN
+F 0 "TP1" V 7500 3800 50  0000 C CNN
 F 1 "TestPoint" V 7604 3622 50  0001 C CNN
 F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 7700 3550 50  0001 C CNN
 F 3 "~" H 7700 3550 50  0001 C CNN
@@ -1070,34 +1070,6 @@ F 6 "Yageo" H 7100 3050 50  0001 C CNN "Manufacturer"
 	1    7100 3050
 	1    0    0    -1  
 $EndComp
-$Comp
-L Connector:TestPoint TP1
-U 1 1 5FE60C7A
-P 7500 3750
-F 0 "TP1" V 7500 4000 50  0000 C CNN
-F 1 "TestPoint" V 7604 3822 50  0001 C CNN
-F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 7700 3750 50  0001 C CNN
-F 3 "~" H 7700 3750 50  0001 C CNN
-F 4 "-" H 7500 3750 50  0001 C CNN "DigiKey P/N"
-F 5 "-" H 7500 3750 50  0001 C CNN "Manufacturer"
-F 6 "-" H 7500 3750 50  0001 C CNN "Mfg P/N"
-	1    7500 3750
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Connector:TestPoint TP2
-U 1 1 5FE60F1E
-P 7500 3850
-F 0 "TP2" V 7500 4100 50  0000 C CNN
-F 1 "TestPoint" V 7604 3922 50  0001 C CNN
-F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 7700 3850 50  0001 C CNN
-F 3 "~" H 7700 3850 50  0001 C CNN
-F 4 "-" H 7500 3850 50  0001 C CNN "DigiKey P/N"
-F 5 "-" H 7500 3850 50  0001 C CNN "Manufacturer"
-F 6 "-" H 7500 3850 50  0001 C CNN "Mfg P/N"
-	1    7500 3850
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
 	8400 4350 7500 4350
 Wire Wire Line
@@ -1113,10 +1085,10 @@ Wire Wire Line
 Text Label 7500 5550 0    50   ~ 0
 LED_G_L
 $Comp
-L Connector:TestPoint TP3
+L Connector:TestPoint TP2
 U 1 1 5FEEE9C1
 P 10500 5450
-F 0 "TP3" V 10500 5700 50  0000 C CNN
+F 0 "TP2" V 10500 5700 50  0000 C CNN
 F 1 "TestPoint" V 10604 5522 50  0001 C CNN
 F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 10700 5450 50  0001 C CNN
 F 3 "~" H 10700 5450 50  0001 C CNN
@@ -1127,10 +1099,10 @@ F 6 "-" H 10500 5450 50  0001 C CNN "Mfg P/N"
 	0    1    1    0   
 $EndComp
 $Comp
-L Connector:TestPoint TP4
+L Connector:TestPoint TP3
 U 1 1 5FEEFA7D
 P 10500 5550
-F 0 "TP4" V 10500 5800 50  0000 C CNN
+F 0 "TP3" V 10500 5800 50  0000 C CNN
 F 1 "TestPoint" V 10604 5622 50  0001 C CNN
 F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 10700 5550 50  0001 C CNN
 F 3 "~" H 10700 5550 50  0001 C CNN
@@ -1861,4 +1833,6 @@ NoConn ~ 7500 4650
 NoConn ~ 10500 5150
 Wire Wire Line
 	7700 3200 7850 3200
+NoConn ~ 7500 3750
+NoConn ~ 7500 3850
 $EndSCHEMATC
