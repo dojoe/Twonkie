@@ -1,0 +1,367 @@
+-------------------------------
+2D Impedance Calculator Program
+Version 0.2.1.88
+Time: Sat Nov 14 13:23:44 2020
+GPL Version 2.0
+-------------------------------
+Simulation pix map 150 pixels high by 700 pixels wide.
+316024 bytes allocated for bmp.
+Simulation pix map 100 pixels high by 700 pixels wide.
+211024 bytes allocated for bmp.
+Simulation pix map 320 pixels high by 700 pixels wide.
+673024 bytes allocated for bmp.
+Simulation pix map 320 pixels high by 700 pixels wide.
+673024 bytes allocated for bmp.
+Simulation pix map 307 pixels high by 700 pixels wide.
+645724 bytes allocated for bmp.
+Simulation pix map 352 pixels high by 1200 pixels wide.
+1268224 bytes allocated for bmp.
+Simulation pix map 352 pixels high by 1200 pixels wide.
+1268224 bytes allocated for bmp.
+Simulation pix map 352 pixels high by 1200 pixels wide.
+1268224 bytes allocated for bmp.
+ 
+INPUT PARAMETERS:
+ 
+      Layer             Thick   Specifications 
+       Solder Mask Top   1.00    Opening w=0.0  offset=0.0
+        Signal Layer 1   1.40  9.0-6.0-9.0  Etchback=0.30
+      Laminate Layer 2   6.70    Resin Content  82.5% 3.2-6.0 
+   Copper Plane Bottom   0.70    Opening w=0.0  offset=0.0
+ 
+      Layer             Thick   Er    Loss Tangent
+               Air top  25.40  1.00    0.00000
+       Solder Mask Top   1.00  3.50    0.00200
+        Signal Layer 1   1.40  3.69    0.00120
+      Laminate Layer 2   6.70  3.69    0.00120
+   Copper Plane Bottom   0.70  3.20
+ 
+ DC resistance by dimensions:
+ Rdc_trace_1= 55.72      Rdc_trace_2 = 55.72  milliohms/in 20C
+ 
+ DC resistance by pixel count:
+ Rdc_trace_1=  55.814     Rdc_trace_2 =  55.814 milliohm/in
+ C_odd      =   2.929 pF/in    C_even =   2.162 pF/in
+ Er_odd     =   2.680         Er_even =   2.928
+ Loss_tan_o = 0.00110     Loss_tan_e  = 0.00111  
+ Delay_odd  = 138.700      Delay_even = 144.980  ps/in.
+ Z_diff     =  94.723  ohms   Z_comm  =  33.529  ohms
+ 
+Simulation pix map 322 pixels high by 1200 pixels wide.
+1160224 bytes allocated for bmp.
+ 
+INPUT PARAMETERS:
+ 
+      Layer             Thick   Specifications 
+        Signal Layer 1   1.40  9.0-6.0-9.0  Etchback=0.30
+      Laminate Layer 2   6.70    Resin Content  82.5% 3.2-6.0 
+   Copper Plane Bottom   0.70    Opening w=0.0  offset=0.0
+ 
+      Layer             Thick   Er    Loss Tangent
+               Air top  23.40  1.00    0.00000
+        Signal Layer 1   1.40  3.69    0.00120
+      Laminate Layer 2   6.70  3.69    0.00120
+   Copper Plane Bottom   0.70  3.20
+ 
+ DC resistance by dimensions:
+ Rdc_trace_1= 55.72      Rdc_trace_2 = 55.72  milliohms/in 20C
+ 
+ DC resistance by pixel count:
+ Rdc_trace_1=  55.814     Rdc_trace_2 =  55.814 milliohm/in
+ C_odd      =   2.545 pF/in    C_even =   2.028 pF/in
+ Er_odd     =   2.325         Er_even =   2.711
+ Loss_tan_o = 0.00093     Loss_tan_e  = 0.00102  
+ Delay_odd  = 129.185      Delay_even = 139.511  ps/in.
+ Z_diff     = 101.525  ohms   Z_comm  =  34.394  ohms
+ 
+Simulation pix map 322 pixels high by 1200 pixels wide.
+1160224 bytes allocated for bmp.
+ 
+INPUT PARAMETERS:
+ 
+      Layer             Thick   Specifications 
+        Signal Layer 1   1.40  9.0-6.0-9.0  Etchback=0.30
+      Laminate Layer 2   6.70    Resin Content  82.5% 3.2-6.0 
+   Copper Plane Bottom   0.70    Opening w=0.0  offset=0.0
+ 
+      Layer             Thick   Er    Loss Tangent
+               Air top  23.40  1.00    0.00000
+        Signal Layer 1   1.40  3.69    0.00120
+      Laminate Layer 2   6.70  3.69    0.00120
+   Copper Plane Bottom   0.70  3.20
+ 
+ DC resistance by dimensions:
+ Rdc_trace_1= 55.72      Rdc_trace_2 = 55.72  milliohms/in 20C
+ 
+ DC resistance by pixel count:
+ Rdc_trace_1=  55.814     Rdc_trace_2 =  55.814 milliohm/in
+ C_odd      =   2.545 pF/in    C_even =   2.028 pF/in
+ Er_odd     =   2.327         Er_even =   2.717
+ Loss_tan_o = 0.00093     Loss_tan_e  = 0.00102  
+ Delay_odd  = 129.252      Delay_even = 139.656  ps/in.
+ Z_diff     = 101.585  ohms   Z_comm  =  34.432  ohms
+ 
+Simulation pix map 352 pixels high by 1400 pixels wide.
+1479424 bytes allocated for bmp.
+ 
+INPUT PARAMETERS:
+ 
+      Layer             Thick   Specifications 
+       Solder Mask Top   1.00    Opening w=0.0  offset=0.0
+        Signal Layer 1   1.40  11.0-6.0-11.0  Etchback=0.30
+      Laminate Layer 2   6.70    Resin Content  82.5% 3.2-6.0 
+   Copper Plane Bottom   0.70    Opening w=0.0  offset=0.0
+ 
+      Layer             Thick   Er    Loss Tangent
+               Air top  25.40  1.00    0.00000
+       Solder Mask Top   1.00  3.50    0.00200
+        Signal Layer 1   1.40  3.69    0.00120
+      Laminate Layer 2   6.70  3.69    0.00120
+   Copper Plane Bottom   0.70  3.20
+ 
+ DC resistance by dimensions:
+ Rdc_trace_1= 45.31      Rdc_trace_2 = 45.31  milliohms/in 20C
+ 
+ DC resistance by pixel count:
+ Rdc_trace_1=  45.368     Rdc_trace_2 =  45.368 milliohm/in
+ C_odd      =   3.205 pF/in    C_even =   2.428 pF/in
+ Er_odd     =   2.700         Er_even =   2.954
+ Loss_tan_o = 0.00109     Loss_tan_e  = 0.00111  
+ Delay_odd  = 139.222      Delay_even = 145.621  ps/in.
+ Z_diff     =  86.868  ohms   Z_comm  =  29.985  ohms
+ 
+Simulation pix map 352 pixels high by 1200 pixels wide.
+1268224 bytes allocated for bmp.
+ 
+INPUT PARAMETERS:
+ 
+      Layer             Thick   Specifications 
+       Solder Mask Top   1.00    Opening w=0.0  offset=0.0
+        Signal Layer 1   1.40  9.0-6.0-9.0  Etchback=0.00
+      Laminate Layer 2   6.70    Resin Content  82.5% 3.2-6.0 
+   Copper Plane Bottom   0.70    Opening w=0.0  offset=0.0
+ 
+      Layer             Thick   Er    Loss Tangent
+               Air top  25.40  1.00    0.00000
+       Solder Mask Top   1.00  3.50    0.00200
+        Signal Layer 1   1.40  3.69    0.00120
+      Laminate Layer 2   6.70  3.69    0.00120
+   Copper Plane Bottom   0.70  3.20
+ 
+ DC resistance by dimensions:
+ Rdc_trace_1= 53.87      Rdc_trace_2 = 53.87  milliohms/in 20C
+ 
+ DC resistance by pixel count:
+ Rdc_trace_1=  53.865     Rdc_trace_2 =  53.865 milliohm/in
+ C_odd      =   2.987 pF/in    C_even =   2.180 pF/in
+ Er_odd     =   2.678         Er_even =   2.934
+ Loss_tan_o = 0.00110     Loss_tan_e  = 0.00111  
+ Delay_odd  = 138.649      Delay_even = 145.113  ps/in.
+ Z_diff     =  92.823  ohms   Z_comm  =  33.288  ohms
+ 
+Simulation pix map 352 pixels high by 1200 pixels wide.
+1268224 bytes allocated for bmp.
+ 
+INPUT PARAMETERS:
+ 
+      Layer             Thick   Specifications 
+       Solder Mask Top   1.00    Opening w=0.0  offset=0.0
+        Signal Layer 1   1.40  9.0-6.0-9.0  Etchback=0.30
+      Laminate Layer 2   6.70    Resin Content  82.5% 3.2-6.0 
+   Copper Plane Bottom   0.70    Opening w=0.0  offset=0.0
+ 
+      Layer             Thick   Er    Loss Tangent
+               Air top  25.40  1.00    0.00000
+       Solder Mask Top   1.00  3.50    0.00200
+        Signal Layer 1   1.40  3.69    0.00120
+      Laminate Layer 2   6.70  3.69    0.00120
+   Copper Plane Bottom   0.70  3.20
+ 
+ DC resistance by dimensions:
+ Rdc_trace_1= 55.72      Rdc_trace_2 = 55.72  milliohms/in 20C
+ 
+ DC resistance by pixel count:
+ Rdc_trace_1=  55.814     Rdc_trace_2 =  55.814 milliohm/in
+ C_odd      =   2.928 pF/in    C_even =   2.161 pF/in
+ Er_odd     =   2.682         Er_even =   2.935
+ Loss_tan_o = 0.00110     Loss_tan_e  = 0.00111  
+ Delay_odd  = 138.760      Delay_even = 145.145  ps/in.
+ Z_diff     =  94.795  ohms   Z_comm  =  33.583  ohms
+ 
+Simulation pix map 352 pixels high by 1300 pixels wide.
+1373824 bytes allocated for bmp.
+ 
+INPUT PARAMETERS:
+ 
+      Layer             Thick   Specifications 
+       Solder Mask Top   1.00    Opening w=0.0  offset=0.0
+        Signal Layer 1   1.40  10.0-6.0-10.0  Etchback=0.30
+      Laminate Layer 2   6.70    Resin Content  82.5% 3.2-6.0 
+   Copper Plane Bottom   0.70    Opening w=0.0  offset=0.0
+ 
+      Layer             Thick   Er    Loss Tangent
+               Air top  25.40  1.00    0.00000
+       Solder Mask Top   1.00  3.50    0.00200
+        Signal Layer 1   1.40  3.69    0.00120
+      Laminate Layer 2   6.70  3.69    0.00120
+   Copper Plane Bottom   0.70  3.20
+ 
+ DC resistance by dimensions:
+ Rdc_trace_1= 49.98      Rdc_trace_2 = 49.98  milliohms/in 20C
+ 
+ DC resistance by pixel count:
+ Rdc_trace_1=  50.052     Rdc_trace_2 =  50.052 milliohm/in
+ C_odd      =   3.067 pF/in    C_even =   2.295 pF/in
+ Er_odd     =   2.691         Er_even =   2.945
+ Loss_tan_o = 0.00109     Loss_tan_e  = 0.00111  
+ Delay_odd  = 138.989      Delay_even = 145.396  ps/in.
+ Z_diff     =  90.634  ohms   Z_comm  =  31.679  ohms
+ 
+Simulation pix map 352 pixels high by 1400 pixels wide.
+1479424 bytes allocated for bmp.
+ 
+INPUT PARAMETERS:
+ 
+      Layer             Thick   Specifications 
+       Solder Mask Top   1.00    Opening w=0.0  offset=0.0
+        Signal Layer 1   1.40  10.0-8.0-10.0  Etchback=0.30
+      Laminate Layer 2   6.70    Resin Content  82.5% 3.2-6.0 
+   Copper Plane Bottom   0.70    Opening w=0.0  offset=0.0
+ 
+      Layer             Thick   Er    Loss Tangent
+               Air top  25.40  1.00    0.00000
+       Solder Mask Top   1.00  3.50    0.00200
+        Signal Layer 1   1.40  3.69    0.00120
+      Laminate Layer 2   6.70  3.69    0.00120
+   Copper Plane Bottom   0.70  3.20
+ 
+ DC resistance by dimensions:
+ Rdc_trace_1= 49.98      Rdc_trace_2 = 49.98  milliohms/in 20C
+ 
+ DC resistance by pixel count:
+ Rdc_trace_1=  50.052     Rdc_trace_2 =  50.052 milliohm/in
+ C_odd      =   2.905 pF/in    C_even =   2.365 pF/in
+ Er_odd     =   2.700         Er_even =   2.944
+ Loss_tan_o = 0.00109     Loss_tan_e  = 0.00112  
+ Delay_odd  = 139.227      Delay_even = 145.373  ps/in.
+ Z_diff     =  95.862  ohms   Z_comm  =  30.734  ohms
+ 
+Simulation pix map 352 pixels high by 1300 pixels wide.
+1373824 bytes allocated for bmp.
+Simulation pix map 352 pixels high by 1275 pixels wide.
+1347424 bytes allocated for bmp.
+ 
+INPUT PARAMETERS:
+ 
+      Layer             Thick   Specifications 
+       Solder Mask Top   1.00    Opening w=0.0  offset=0.0
+        Signal Layer 1   1.40  10.0-5.5-10.0  Etchback=0.30
+      Laminate Layer 2   6.70    Resin Content  82.5% 3.2-6.0 
+   Copper Plane Bottom   0.70    Opening w=0.0  offset=0.0
+ 
+      Layer             Thick   Er    Loss Tangent
+               Air top  25.40  1.00    0.00000
+       Solder Mask Top   1.00  3.50    0.00200
+        Signal Layer 1   1.40  3.69    0.00120
+      Laminate Layer 2   6.70  3.69    0.00120
+   Copper Plane Bottom   0.70  3.20
+ 
+ DC resistance by dimensions:
+ Rdc_trace_1= 49.98      Rdc_trace_2 = 49.98  milliohms/in 20C
+ 
+ DC resistance by pixel count:
+ Rdc_trace_1=  50.052     Rdc_trace_2 =  50.052 milliohm/in
+ C_odd      =   3.137 pF/in    C_even =   2.270 pF/in
+ Er_odd     =   2.690         Er_even =   2.944
+ Loss_tan_o = 0.00110     Loss_tan_e  = 0.00111  
+ Delay_odd  = 138.962      Delay_even = 145.373  ps/in.
+ Z_diff     =  88.588  ohms   Z_comm  =  32.020  ohms
+ 
+Simulation pix map 352 pixels high by 1255 pixels wide.
+1326304 bytes allocated for bmp.
+ 
+INPUT PARAMETERS:
+ 
+      Layer             Thick   Specifications 
+       Solder Mask Top   1.00    Opening w=0.0  offset=0.0
+        Signal Layer 1   1.40  9.8-5.5-9.8  Etchback=0.30
+      Laminate Layer 2   6.70    Resin Content  82.5% 3.2-6.0 
+   Copper Plane Bottom   0.70    Opening w=0.0  offset=0.0
+ 
+      Layer             Thick   Er    Loss Tangent
+               Air top  25.40  1.00    0.00000
+       Solder Mask Top   1.00  3.50    0.00200
+        Signal Layer 1   1.40  3.69    0.00120
+      Laminate Layer 2   6.70  3.69    0.00120
+   Copper Plane Bottom   0.70  3.20
+ 
+ DC resistance by dimensions:
+ Rdc_trace_1= 51.03      Rdc_trace_2 = 51.03  milliohms/in 20C
+ 
+ DC resistance by pixel count:
+ Rdc_trace_1=  51.107     Rdc_trace_2 =  51.107 milliohm/in
+ C_odd      =   3.097 pF/in    C_even =   2.248 pF/in
+ Er_odd     =   2.688         Er_even =   2.942
+ Loss_tan_o = 0.00110     Loss_tan_e  = 0.00111  
+ Delay_odd  = 138.919      Delay_even = 145.328  ps/in.
+ Z_diff     =  89.719  ohms   Z_comm  =  32.330  ohms
+ 
+Simulation pix map 352 pixels high by 1200 pixels wide.
+1268224 bytes allocated for bmp.
+ 
+INPUT PARAMETERS:
+ 
+      Layer             Thick   Specifications 
+       Solder Mask Top   1.00    Opening w=0.0  offset=0.0
+        Signal Layer 1   1.40  9.0-6.0-9.0  Etchback=0.30
+      Laminate Layer 2   6.70    Resin Content  82.5% 3.2-6.0 
+   Copper Plane Bottom   0.70    Opening w=0.0  offset=0.0
+ 
+      Layer             Thick   Er    Loss Tangent
+               Air top  25.40  1.00    0.00000
+       Solder Mask Top   1.00  3.50    0.00200
+        Signal Layer 1   1.40  3.69    0.00120
+      Laminate Layer 2   6.70  3.69    0.00120
+   Copper Plane Bottom   0.70  3.20
+ 
+ DC resistance by dimensions:
+ Rdc_trace_1= 55.72      Rdc_trace_2 = 55.72  milliohms/in 20C
+ 
+ DC resistance by pixel count:
+ Rdc_trace_1=  55.814     Rdc_trace_2 =  55.814 milliohm/in
+ C_odd      =   2.928 pF/in    C_even =   2.161 pF/in
+ Er_odd     =   2.682         Er_even =   2.935
+ Loss_tan_o = 0.00110     Loss_tan_e  = 0.00111  
+ Delay_odd  = 138.760      Delay_even = 145.145  ps/in.
+ Z_diff     =  94.795  ohms   Z_comm  =  33.583  ohms
+ 
+Simulation pix map 352 pixels high by 1300 pixels wide.
+1373824 bytes allocated for bmp.
+ 
+INPUT PARAMETERS:
+ 
+      Layer             Thick   Specifications 
+       Solder Mask Top   1.00    Opening w=0.0  offset=0.0
+        Signal Layer 1   1.40  10.0-6.0-10.0  Etchback=0.30
+      Laminate Layer 2   6.70    Resin Content  82.5% 3.2-6.0 
+   Copper Plane Bottom   0.70    Opening w=0.0  offset=0.0
+ 
+      Layer             Thick   Er    Loss Tangent
+               Air top  25.40  1.00    0.00000
+       Solder Mask Top   1.00  3.50    0.00200
+        Signal Layer 1   1.40  3.69    0.00120
+      Laminate Layer 2   6.70  3.69    0.00120
+   Copper Plane Bottom   0.70  3.20
+ 
+ DC resistance by dimensions:
+ Rdc_trace_1= 49.98      Rdc_trace_2 = 49.98  milliohms/in 20C
+ 
+ DC resistance by pixel count:
+ Rdc_trace_1=  50.052     Rdc_trace_2 =  50.052 milliohm/in
+ C_odd      =   3.067 pF/in    C_even =   2.295 pF/in
+ Er_odd     =   2.691         Er_even =   2.945
+ Loss_tan_o = 0.00109     Loss_tan_e  = 0.00111  
+ Delay_odd  = 138.989      Delay_even = 145.396  ps/in.
+ Z_diff     =  90.634  ohms   Z_comm  =  31.679  ohms
+ 
+Log file save name:
