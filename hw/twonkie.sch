@@ -47,7 +47,7 @@ U 1 1 5F88E97E
 P 9000 4750
 F 0 "U4" H 9000 4700 50  0000 C CNN
 F 1 "STM32F072CB" H 9000 4600 50  0000 C CNN
-F 2 "Package_QFP:LQFP-48_7x7mm_P0.5mm" H 8500 3350 50  0001 R CNN
+F 2 "twonkie:LQFP-48_7x7mm_P0.5mm-QFN48-Frankenstein" H 8500 3350 50  0001 R CNN
 F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/AD8610_8620.pdf" H 9000 4750 50  0001 C CNN
 F 4 "497-19319-1-ND" H 9000 4750 50  0001 C CNN "DigiKey P/N"
 F 5 "STMicro" H 9000 4750 50  0001 C CNN "Manufacturer"
