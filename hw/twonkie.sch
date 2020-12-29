@@ -508,20 +508,6 @@ F 3 "" H 4700 950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Switch:SW_Push SW1
-U 1 1 5FAB092D
-P 7500 3200
-F 0 "SW1" H 7500 3400 50  0000 C CNN
-F 1 "EVQ-P7M01P" H 7500 3100 50  0000 C CNN
-F 2 "Button_Switch_SMD:SW_SPST_EVQP7C" H 7500 3500 50  0001 C CNN
-F 3 "http://www.apem.com/int/index.php?controller=attachment&id_attachment=1371" H 7500 3500 50  0001 C CNN
-F 4 "P16770CT-ND" H 7500 3200 50  0001 C CNN "DigiKey P/N"
-F 5 "Panasonic" H 7500 3200 50  0001 C CNN "Manufacturer"
-F 6 "EVQ-P7M01P" H 7500 3200 50  0001 C CNN "Mfg P/N"
-	1    7500 3200
-	-1   0    0    -1  
-$EndComp
-$Comp
 L Device:C_Small C2
 U 1 1 5FB990AE
 P 9800 3050
@@ -962,46 +948,6 @@ F 6 "-" H 7500 3550 50  0001 C CNN "Mfg P/N"
 	1    7500 3550
 	0    -1   -1   0   
 $EndComp
-$Comp
-L power:GND #PWR0124
-U 1 1 5FE51FD2
-P 7100 4250
-F 0 "#PWR0124" H 7100 4000 50  0001 C CNN
-F 1 "GND" H 7105 4077 50  0000 C CNN
-F 2 "" H 7100 4250 50  0001 C CNN
-F 3 "" H 7100 4250 50  0001 C CNN
-	1    7100 4250
-	-1   0    0    -1  
-$EndComp
-Wire Wire Line
-	7100 3950 8400 3950
-Wire Wire Line
-	7300 3200 7100 3200
-$Comp
-L power:+3V3 #PWR0125
-U 1 1 5FE52452
-P 7850 2900
-F 0 "#PWR0125" H 7850 2750 50  0001 C CNN
-F 1 "+3V3" H 7865 3073 50  0000 C CNN
-F 2 "" H 7850 2900 50  0001 C CNN
-F 3 "" H 7850 2900 50  0001 C CNN
-	1    7850 2900
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R1
-U 1 1 5FE52997
-P 7100 4100
-F 0 "R1" H 7170 4146 50  0000 L CNN
-F 1 "35k7" H 7170 4055 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder" V 7030 4100 50  0001 C CNN
-F 3 "~" H 7100 4100 50  0001 C CNN
-F 4 "311-35.7KLRCT-ND" H 7100 4100 50  0001 C CNN "DigiKey P/N"
-F 5 "RC0402FR-0735K7L" H 7100 4100 50  0001 C CNN "Mfg P/N"
-F 6 "Yageo" H 7100 4100 50  0001 C CNN "Manufacturer"
-	1    7100 4100
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	8400 4350 7500 4350
 Wire Wire Line
@@ -1044,8 +990,6 @@ F 6 "-" H 10500 5550 50  0001 C CNN "Mfg P/N"
 	1    10500 5550
 	0    1    1    0   
 $EndComp
-Wire Wire Line
-	7100 3950 7100 3200
 $Comp
 L Device:R R22
 U 1 1 5FA9841C
@@ -1591,7 +1535,6 @@ F 5 "Yageo" H 3100 950 50  0001 C CNN "Manufacturer"
 	-1   0    0    1   
 $EndComp
 NoConn ~ 10500 4950
-NoConn ~ 4600 7300
 $Comp
 L power:PWR_FLAG #FLG0101
 U 1 1 6024BFA9
@@ -1758,8 +1701,6 @@ Text Label 7500 6050 0    50   ~ 0
 CC2_RP1A5
 NoConn ~ 7500 4550
 NoConn ~ 7500 4650
-Wire Wire Line
-	7700 3200 7850 3200
 NoConn ~ 7500 3750
 NoConn ~ 7500 3850
 Text Label 10500 5250 2    50   ~ 0
@@ -1827,20 +1768,6 @@ Wire Wire Line
 Connection ~ 10350 3400
 Wire Wire Line
 	9100 3250 9700 3250
-Connection ~ 7100 3950
-$Comp
-L Device:R R24
-U 1 1 5FB6691F
-P 7850 3050
-F 0 "R24" H 7920 3096 50  0000 L CNN
-F 1 "100" H 7920 3005 50  0000 L CNN
-F 2 "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder" V 7780 3050 50  0001 C CNN
-F 3 "~" H 7850 3050 50  0001 C CNN
-F 4 "RC0402FR-07100RL" H 7850 3050 50  0001 C CNN "Mfg P/N"
-F 5 "Yageo" H 7850 3050 50  0001 C CNN "Manufacturer"
-	1    7850 3050
-	1    0    0    -1  
-$EndComp
 $Comp
 L Device:R R25
 U 1 1 5FEB3ABD
@@ -1893,4 +1820,137 @@ Wire Wire Line
 	7400 5150 8400 5150
 Wire Wire Line
 	7100 5250 8400 5250
+Wire Wire Line
+	7500 3950 8400 3950
+Wire Wire Line
+	4600 7300 4950 7300
+Text Label 4950 7300 2    50   ~ 0
+USB_B_ID
+Wire Notes Line
+	5600 5150 5600 2550
+Wire Notes Line
+	5600 5150 6950 5150
+Text Notes 5650 3050 0    39   ~ 0
+Use A-to-A cable plugged into\nOTG adapter for bootloader mode,\nor use normal Micro-B cable and\nhold SW1 while plugging.
+Text Notes 6900 2750 2    98   ~ 0
+Bootloader mode
+Text Label 6850 3800 2    50   ~ 0
+BOOT
+Wire Wire Line
+	6400 3800 6850 3800
+Text Label 5700 4000 0    50   ~ 0
+USB_B_ID
+$Comp
+L power:GND #PWR05
+U 1 1 5FF50DC2
+P 6400 4900
+F 0 "#PWR05" H 6400 4650 50  0001 C CNN
+F 1 "GND" H 6405 4727 50  0000 C CNN
+F 2 "" H 6400 4900 50  0001 C CNN
+F 3 "" H 6400 4900 50  0001 C CNN
+	1    6400 4900
+	-1   0    0    -1  
+$EndComp
+$Comp
+L power:+3V3 #PWR04
+U 1 1 5FF50DC8
+P 6100 3300
+F 0 "#PWR04" H 6100 3150 50  0001 C CNN
+F 1 "+3V3" H 6115 3473 50  0000 C CNN
+F 2 "" H 6100 3300 50  0001 C CNN
+F 3 "" H 6100 3300 50  0001 C CNN
+	1    6100 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R27
+U 1 1 5FF50DD1
+P 6100 3550
+F 0 "R27" H 6170 3596 50  0000 L CNN
+F 1 "35k7" H 6170 3505 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder" V 6030 3550 50  0001 C CNN
+F 3 "~" H 6100 3550 50  0001 C CNN
+F 4 "311-35.7KLRCT-ND" H 6100 3550 50  0001 C CNN "DigiKey P/N"
+F 5 "RC0402FR-0735K7L" H 6100 3550 50  0001 C CNN "Mfg P/N"
+F 6 "Yageo" H 6100 3550 50  0001 C CNN "Manufacturer"
+	1    6100 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_FET:FDG6335N Q4
+U 1 1 5FF50DE2
+P 6300 4000
+F 0 "Q4" H 6505 4046 50  0000 L CNN
+F 1 "BSD840N" H 6505 3955 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-363_SC-70-6" H 6500 3925 50  0001 L CIN
+F 3 "http://www.gneic.com/product/datasheet/FDG6335N-1122853.pdf" H 6300 4000 50  0001 L CNN
+F 4 "BSD840NH6327XTSA1CT-ND" H 6300 4000 50  0001 C CNN "DigiKey P/N"
+F 5 "Infineon" H 6300 4000 50  0001 C CNN "Manufacturer"
+F 6 "BSD840NH6327XTSA1" H 6300 4000 50  0001 C CNN "Mfg P/N"
+	1    6300 4000
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	6100 3300 6100 3400
+Wire Wire Line
+	6100 3400 6400 3400
+Connection ~ 6100 3400
+Wire Wire Line
+	6100 3700 6100 4000
+Wire Wire Line
+	6100 4000 6100 4100
+Connection ~ 6100 4000
+Wire Wire Line
+	6100 4500 6100 4600
+Wire Wire Line
+	6100 4900 6400 4900
+Wire Wire Line
+	6400 4900 6400 4200
+Connection ~ 6400 4900
+Wire Wire Line
+	6100 4000 5700 4000
+Wire Wire Line
+	6400 3700 6400 3800
+Connection ~ 6400 3800
+$Comp
+L Switch:SW_Push SW1
+U 1 1 5FF46D11
+P 6100 4300
+F 0 "SW1" H 6100 4500 50  0000 C CNN
+F 1 "EVQ-P7M01P" H 6100 4200 50  0000 C CNN
+F 2 "Button_Switch_SMD:SW_SPST_EVQP7C" H 6100 4600 50  0001 C CNN
+F 3 "http://www.apem.com/int/index.php?controller=attachment&id_attachment=1371" H 6100 4600 50  0001 C CNN
+F 4 "P16770CT-ND" H 6100 4300 50  0001 C CNN "DigiKey P/N"
+F 5 "Panasonic" H 6100 4300 50  0001 C CNN "Manufacturer"
+F 6 "EVQ-P7M01P" H 6100 4300 50  0001 C CNN "Mfg P/N"
+	1    6100 4300
+	0    -1   1    0   
+$EndComp
+$Comp
+L Device:R R24
+U 1 1 5FB6691F
+P 6100 4750
+F 0 "R24" H 6170 4796 50  0000 L CNN
+F 1 "100" H 6170 4705 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder" V 6030 4750 50  0001 C CNN
+F 3 "~" H 6100 4750 50  0001 C CNN
+F 4 "RC0402FR-07100RL" H 6100 4750 50  0001 C CNN "Mfg P/N"
+F 5 "Yageo" H 6100 4750 50  0001 C CNN "Manufacturer"
+	1    6100 4750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 5FF46D15
+P 6400 3550
+F 0 "R1" H 6470 3596 50  0000 L CNN
+F 1 "35k7" H 6470 3505 50  0000 L CNN
+F 2 "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder" V 6330 3550 50  0001 C CNN
+F 3 "~" H 6400 3550 50  0001 C CNN
+F 4 "311-35.7KLRCT-ND" H 6400 3550 50  0001 C CNN "DigiKey P/N"
+F 5 "RC0402FR-0735K7L" H 6400 3550 50  0001 C CNN "Mfg P/N"
+F 6 "Yageo" H 6400 3550 50  0001 C CNN "Manufacturer"
+	1    6400 3550
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
