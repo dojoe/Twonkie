@@ -35,6 +35,10 @@ The v1.0 Gerbers in this repo no longer need the botch wires around Q4 either, I
  * [ ] Get Twinkie support upstreamed in sigrok/PulseView
  * [ ] Nicer v1.0 photos
 
+# Similar projects
+
+ * As luck would have it, [Greg Davill](https://github.com/gregdavill) started a project with the exact same goal at a very similar time, so there's now two of us :) https://github.com/gregdavill/PD-sniffer
+
 # Licenses
 
 ## Hardware (as found in the `hw` subdirectory)
