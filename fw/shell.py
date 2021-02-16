@@ -9,7 +9,7 @@ endpoints = {
     "COMMANDS": 2,
 }
 
-iface = 0 if len(argv) < 2 else endpoints(argv[1].upper())
+iface = 0 if len(argv) < 2 else endpoints[argv[1].upper()]
 
 
 class Printer(Thread):
