@@ -28,10 +28,14 @@ The v1.0 Gerbers in this repo no longer need the botch wires around Q4 either, I
  * The microcontroller pins are rearranged for easier routing, so you'll need a different firmware. Binaries are provided and firmware sources that don't need a full ChromeOS build system will follow soon.
  * The USB-C connectors are attached in a hair-raising straddle mount configuration. The way they're soldered to the PCB makes them rock solid though, maybe even more solid than the original Twinkie, and they transfer TB3 20Gbit/s lanes just fine.
 
+## Sweet! How do I build my own?
+
+I'm glad you asked! Get the board made via the OSH Park link above, or supply the v1.0 Gerbers in this repository to a PCB fab of your choice, get the parts from Digikey or Mouser or what have you, and follow the [Assembly instructions](hw/README.md) to build the device. I recommend ordering a few extra parts: Get one more of each Type-C connector since you're going to modify them in ways that might end up with a broken connector, and generously round up the number of 0402 passives since you're going to drop some of them and you will _never_ find them again :)
+
 # TODOs
 
  * [ ] Easy-to-build firmware sources
- * [ ] Assembly instructions
+ * [x] [Assembly instructions](hw/README.md)
  * [ ] Get Twinkie support upstreamed in sigrok/PulseView
  * [ ] Nicer v1.0 photos
 
