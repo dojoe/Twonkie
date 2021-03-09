@@ -1,0 +1,204 @@
+/* Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+/* Debug console for Chrome EC */
+
+#ifndef __CROS_EC_CONSOLE_H
+#define __CROS_EC_CONSOLE_H
+
+#include <stdarg.h>  /* For va_list */
+#include "common.h"
+
+/* Console command; used by DECLARE_CONSOLE_COMMAND macro. */
+struct console_command {
+	/* Command name.  Case-insensitive. */
+	const char *name;
+	/* Handler for the command.  argv[0] will be the command name. */
+	int (*handler)(int argc, char **argv);
+#ifdef CONFIG_CONSOLE_CMDHELP
+	/* Description of args */
+	const char *argdesc;
+	/* Short help for command */
+	const char *help;
+#endif
+#ifdef CONFIG_CONSOLE_COMMAND_FLAGS
+	const uint32_t flags;
+#endif
+};
+
+/* Flag bits for when CONFIG_CONSOLE_COMMAND_FLAGS is enabled */
+#define CMD_FLAG_RESTRICTED  0x00000001
+
+/* The default .flags value can be overridden in board.h */
+#ifndef CONFIG_CONSOLE_COMMAND_FLAGS_DEFAULT
+#define CONFIG_CONSOLE_COMMAND_FLAGS_DEFAULT 0
+#endif
+
+#ifdef CONFIG_RESTRICTED_CONSOLE_COMMANDS
+/*
+ * This must be implemented somewhere. A true return value means that all
+ * CMD_FLAG_RESTRICTED commands are disabled.
+ */
+int console_is_restricted(void);
+#else
+static inline int console_is_restricted(void)
+{
+	return 0;
+}
+#endif
+
+/* Console channels */
+enum console_channel {
+	#define CONSOLE_CHANNEL(enumeration, string) enumeration,
+	#include "include/console_channel.inc"
+	#undef CONSOLE_CHANNEL
+
+	/* Channel count; not itself a channel */
+	CC_CHANNEL_COUNT
+};
+
+/* Mask in channel_mask for a particular channel */
+#define CC_MASK(channel)	(1UL << (channel))
+
+/* Mask to use to enable all channels */
+#define CC_ALL			0xffffffffUL
+
+/**
+ * Put a string to the console channel.
+ *
+ * @param channel	Output chanel
+ * @param outstr	String to write
+ *
+ * @return non-zero if output was truncated.
+ */
+int cputs(enum console_channel channel, const char *outstr);
+
+/**
+ * Print formatted output to the console channel.
+ *
+ * @param channel	Output chanel
+ * @param format	Format string; see printf.h for valid formatting codes
+ *
+ * @return non-zero if output was truncated.
+ */
+int cprintf(enum console_channel channel, const char *format, ...);
+
+/**
+ * Print formatted output with timestamp. This is like:
+ *   cprintf(channel, "[%T " + format + "]\n", ...)
+ *
+ * @param channel	Output channel
+ * @param format	Format string; see printf.h for valid formatting codes
+ *
+ * @return non-zero if output was truncated.
+ */
+int cprints(enum console_channel channel, const char *format, ...);
+
+/**
+ * Flush the console output for all channels.
+ */
+void cflush(void);
+
+/* Convenience macros for printing to the command channel.
+ *
+ * Modules may define similar macros in their .c files for their own use; it is
+ * recommended those module-specific macros be named CPUTS and CPRINTF. */
+#define ccputs(outstr) cputs(CC_COMMAND, outstr)
+/* gcc allows variable arg lists in macros; see
+ * http://gcc.gnu.org/onlinedocs/gcc/Variadic-Macros.html */
+#define ccprintf(format, args...) cprintf(CC_COMMAND, format, ## args)
+#define ccprints(format, args...) cprints(CC_COMMAND, format, ## args)
+
+/**
+ * Called by UART when a line of input is pending.
+ */
+void console_has_input(void);
+
+/**
+ * Register a console command handler.
+ *
+ * @param name          Command name; must not be the beginning of another
+ *                      existing command name.  Note this is NOT in quotes
+ *                      so it can be concatenated to form a struct name.
+ * @param routine       Command handling routine, of the form
+ *                      int handler(int argc, char **argv)
+ * @param argdesc       String describing arguments to command; NULL if none.
+ * @param help          String with one-line description of command, or NULL.
+ * @param flags         Per-command flags, if needed.
+ */
+#ifndef HAS_TASK_CONSOLE
+#define DECLARE_CONSOLE_COMMAND(NAME, ROUTINE, ARGDESC, HELP)		\
+	int (ROUTINE)(int argc, char **argv) __attribute__((unused))
+#define DECLARE_SAFE_CONSOLE_COMMAND(NAME, ROUTINE, ARGDESC, HELP)	\
+	int (ROUTINE)(int argc, char **argv) __attribute__((unused))
+#define DECLARE_CONSOLE_COMMAND_FLAGS(NAME, ROUTINE, ARGDESC, HELP, FLAGS) \
+	int (ROUTINE)(int argc, char **argv) __attribute__((unused))
+#else
+
+/* We always provde help args, but we may discard them to save space. */
+#if defined(CONFIG_CONSOLE_CMDHELP)
+#define _HELP_ARGS(A, H)						\
+	.argdesc = A,							\
+	.help = H,
+#else
+#define _HELP_ARGS(A, H)
+#endif
+
+/* We may or may not have a .flags field */
+#ifdef CONFIG_CONSOLE_COMMAND_FLAGS
+#define _FLAG_ARGS(F)							\
+	.flags = F,
+#else
+#define _FLAG_ARGS(F)
+#endif
+
+/* This macro takes all possible args and discards the ones we don't use */
+#define _DCL_CON_CMD_ALL(NAME, ROUTINE, ARGDESC, HELP, FLAGS)		\
+	static const char __con_cmd_label_##NAME[] = #NAME;		\
+	struct size_check##NAME {					\
+		int field[2 * (sizeof(__con_cmd_label_##NAME) < 16) - 1]; }; \
+	const struct console_command __keep __con_cmd_##NAME		\
+	__attribute__((section(".rodata.cmds." #NAME))) =		\
+	{ .name = __con_cmd_label_##NAME,				\
+	  .handler = ROUTINE,						\
+	  _HELP_ARGS(ARGDESC, HELP)					\
+	  _FLAG_ARGS(FLAGS)						\
+	}
+
+/*
+ * If the .flags field exists, we can use this to specify its value. If not,
+ * the value will be discarded so it doesn't matter.
+ */
+#define DECLARE_CONSOLE_COMMAND_FLAGS(NAME, ROUTINE, ARGDESC, HELP, FLAGS) \
+	_DCL_CON_CMD_ALL(NAME, ROUTINE, ARGDESC, HELP, FLAGS)
+
+/* This works as before, for the same reason. */
+#define DECLARE_CONSOLE_COMMAND(NAME, ROUTINE, ARGDESC, HELP)	\
+	_DCL_CON_CMD_ALL(NAME, ROUTINE, ARGDESC, HELP,		\
+			 CONFIG_CONSOLE_COMMAND_FLAGS_DEFAULT)
+
+/*
+ * This can be used to ensure that whatever default flag bits are set (if any),
+ * the command is never restricted. BE CAREFUL! You should only use this for
+ * commands that either do nothing or that do only safe things.
+ */
+#define DECLARE_SAFE_CONSOLE_COMMAND(NAME, ROUTINE, ARGDESC, HELP)	\
+	_DCL_CON_CMD_ALL(NAME, ROUTINE, ARGDESC, HELP,			\
+			 (CONFIG_CONSOLE_COMMAND_FLAGS_DEFAULT &	\
+			  ~CMD_FLAG_RESTRICTED))
+
+#endif	/* HAS_TASK_CONSOLE */
+
+/*
+ * Packetized console under CONFIG_CONSOLE_PACKETS flags.
+ */
+
+int console_packet_get_command(char *buf);
+void console_packet_send_response(int rv);
+int console_packet_puts(enum console_channel channel, const char *outstr);
+int console_packet_vprintf(enum console_channel channel, const char *format,
+			   va_list args);
+
+#endif  /* __CROS_EC_CONSOLE_H */

@@ -1,0 +1,10 @@
+build/
+private*/
+*.swp
+*.pyc
+tags
+TAGS
+cscope.*
+.tests-passed
+.failedboards/
+.sizes.txt

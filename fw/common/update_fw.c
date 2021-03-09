@@ -1,0 +1,255 @@
+/* Copyright 2016 The Chromium OS Authors. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+#include "byteorder.h"
+#include "console.h"
+#include "extension.h"
+#include "flash.h"
+#include "hooks.h"
+#include "include/compile_time_macros.h"
+#include "rollback.h"
+#include "rwsig.h"
+#include "system.h"
+#include "uart.h"
+#include "update_fw.h"
+#include "util.h"
+#include "vb21_struct.h"
+
+#define CPRINTF(format, args...) cprintf(CC_USB, format, ## args)
+
+/* Section to be updated (i.e. not the current section). */
+struct {
+	uint32_t base_offset;
+	uint32_t top_offset;
+} update_section;
+
+/*
+ * Verify that the passed in block fits into the valid area. If it does, and
+ * is destined to the base address of the area - erase the area contents.
+ *
+ * Return success, or indication of an erase failure or chunk not fitting into
+ * valid area.
+ *
+ * TODO(b/36375666): Each board/chip should be able to re-define this.
+ */
+static uint8_t check_update_chunk(uint32_t block_offset, size_t body_size)
+{
+	uint32_t base;
+	uint32_t size;
+
+	/* Is this an RW chunk? */
+	if (update_section.base_offset != update_section.top_offset &&
+	    (block_offset >= update_section.base_offset) &&
+	    ((block_offset + body_size) <= update_section.top_offset)) {
+
+		base = update_section.base_offset;
+		size = update_section.top_offset -
+			 update_section.base_offset;
+		/*
+		 * If this is the first chunk for this section, it needs to
+		 * be erased.
+		 */
+		if (block_offset == base) {
+			if (flash_physical_erase(base, size) != EC_SUCCESS) {
+				CPRINTF("%s:%d erase failure of 0x%x..+0x%x\n",
+					__func__, __LINE__, base, size);
+				return UPDATE_ERASE_FAILURE;
+			}
+		}
+
+		return UPDATE_SUCCESS;
+	}
+
+	CPRINTF("%s:%d %x, %d section base %x top %x\n",
+		__func__, __LINE__,
+		block_offset, body_size,
+		update_section.base_offset,
+		update_section.top_offset);
+
+	return UPDATE_BAD_ADDR;
+
+}
+
+/* TODO(b/36375666): These need to be overridden for chip/g. */
+int update_pdu_valid(struct update_command *cmd_body, size_t cmd_size)
+{
+	return 1;
+}
+
+static int chunk_came_too_soon(uint32_t block_offset)
+{
+	return 0;
+}
+
+static void new_chunk_written(uint32_t block_offset)
+{
+}
+
+static int contents_allowed(uint32_t block_offset,
+			    size_t body_size, void *update_data)
+{
+	return 1;
+}
+
+/*
+ * Setup internal state (e.g. valid sections, and fill first response).
+ *
+ * Assumes rpdu is already prefilled with 0, and that version has already
+ * been set. May set a return_value != 0 on error.
+ */
+void fw_update_start(struct first_response_pdu *rpdu)
+{
+	const char *version;
+#ifdef CONFIG_RWSIG_TYPE_RWSIG
+	const struct vb21_packed_key *vb21_key;
+#endif
+
+	rpdu->header_type = htobe16(UPDATE_HEADER_TYPE_COMMON);
+
+	/* Determine the valid update section. */
+	switch (system_get_image_copy()) {
+	case SYSTEM_IMAGE_RO:
+		/* RO running, so update RW */
+		update_section.base_offset = CONFIG_RW_MEM_OFF;
+		update_section.top_offset = CONFIG_RW_MEM_OFF + CONFIG_RW_SIZE;
+		version = system_get_version(SYSTEM_IMAGE_RW);
+		break;
+	case SYSTEM_IMAGE_RW:
+		/* RW running, so update RO */
+		update_section.base_offset = CONFIG_RO_MEM_OFF;
+		update_section.top_offset = CONFIG_RO_MEM_OFF + CONFIG_RO_SIZE;
+		version = system_get_version(SYSTEM_IMAGE_RO);
+		break;
+	default:
+		CPRINTF("%s:%d\n", __func__, __LINE__);
+		rpdu->return_value = htobe32(UPDATE_GEN_ERROR);
+		return;
+	}
+
+	rpdu->common.maximum_pdu_size = htobe32(CONFIG_UPDATE_PDU_SIZE);
+	rpdu->common.flash_protection = htobe32(flash_get_protect());
+	rpdu->common.offset = htobe32(update_section.base_offset);
+	if (version)
+		memcpy(rpdu->common.version, version,
+			sizeof(rpdu->common.version));
+
+#ifdef CONFIG_ROLLBACK
+	rpdu->common.min_rollback = htobe32(rollback_get_minimum_version());
+#else
+	rpdu->common.min_rollback = htobe32(-1);
+#endif
+
+#ifdef CONFIG_RWSIG_TYPE_RWSIG
+	vb21_key = (const struct vb21_packed_key *)CONFIG_RO_PUBKEY_ADDR;
+	rpdu->common.key_version = htobe32(vb21_key->key_version);
+#endif
+
+#ifdef HAS_TASK_RWSIG
+	/* Do not allow the update to start if RWSIG is still running. */
+	if (rwsig_get_status() == RWSIG_IN_PROGRESS) {
+		CPRINTF("RWSIG in progress\n");
+		rpdu->return_value = htobe32(UPDATE_RWSIG_BUSY);
+	}
+#endif
+}
+
+void fw_update_command_handler(void *body,
+			       size_t cmd_size,
+			       size_t *response_size)
+{
+	struct update_command *cmd_body = body;
+	void *update_data;
+	uint8_t *error_code = body;  /* Cache the address for code clarity. */
+	size_t body_size;
+	uint32_t block_offset;
+
+	*response_size = 1; /* One byte response unless this is a start PDU. */
+
+	if (cmd_size < sizeof(struct update_command)) {
+		CPRINTF("%s:%d\n", __func__, __LINE__);
+		*error_code = UPDATE_GEN_ERROR;
+		return;
+	}
+	body_size = cmd_size - sizeof(struct update_command);
+
+	if (!cmd_body->block_base && !body_size) {
+		struct first_response_pdu *rpdu = body;
+
+		/*
+		 * This is the connection establishment request, the response
+		 * allows the server to decide what sections of the image to
+		 * send to program into the flash.
+		 */
+
+		/* First, prepare the response structure. */
+		memset(rpdu, 0, sizeof(*rpdu));
+		/*
+		 * TODO(b/36375666): The response size can be shorter depending
+		 * on which board-specific type of response we provide. This
+		 * may send trailing 0 bytes, which should be harmless.
+		 */
+		*response_size = sizeof(*rpdu);
+		rpdu->protocol_version = htobe16(UPDATE_PROTOCOL_VERSION);
+
+		/* Setup internal state (e.g. valid sections, and fill rpdu) */
+		fw_update_start(rpdu);
+		return;
+	}
+
+	block_offset = be32toh(cmd_body->block_base);
+
+	if (!update_pdu_valid(cmd_body, cmd_size)) {
+		*error_code = UPDATE_DATA_ERROR;
+		return;
+	}
+
+	update_data = cmd_body + 1;
+	if (!contents_allowed(block_offset, body_size, update_data)) {
+		*error_code = UPDATE_ROLLBACK_ERROR;
+		return;
+	}
+
+	/* Check if the block will fit into the valid area. */
+	*error_code = check_update_chunk(block_offset, body_size);
+	if (*error_code)
+		return;
+
+	if (chunk_came_too_soon(block_offset)) {
+		*error_code = UPDATE_RATE_LIMIT_ERROR;
+		return;
+	}
+
+	/*
+	 * TODO(b/36375666): chip/g code has some cr50-specific stuff right
+	 * here, which should probably be merged into contents_allowed...
+	 */
+
+	CPRINTF("update: 0x%x\n", block_offset + CONFIG_PROGRAM_MEMORY_BASE);
+	if (flash_physical_write(block_offset, body_size, update_data)
+	    != EC_SUCCESS) {
+		*error_code = UPDATE_WRITE_FAILURE;
+		CPRINTF("%s:%d update write error\n", __func__, __LINE__);
+		return;
+	}
+
+	new_chunk_written(block_offset);
+
+	/* Verify that data was written properly. */
+	if (memcmp(update_data, (void *)
+		   (block_offset + CONFIG_PROGRAM_MEMORY_BASE),
+		   body_size)) {
+		*error_code = UPDATE_VERIFY_ERROR;
+		CPRINTF("%s:%d update verification error\n",
+			__func__, __LINE__);
+		return;
+	}
+
+	*error_code = UPDATE_SUCCESS;
+}
+
+/* TODO(b/36375666): This need to be overridden for chip/g. */
+void fw_update_complete(void)
+{
+}

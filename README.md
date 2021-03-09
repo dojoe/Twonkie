@@ -34,7 +34,7 @@ I'm glad you asked! Get the board made via the OSH Park link above, or supply th
 
 # TODOs
 
- * [ ] Easy-to-build firmware sources
+ * [x] [Easy-to-build firmware sources](fw)
  * [x] [Assembly instructions](hw/README.md)
  * [ ] Get Twinkie support upstreamed in sigrok/PulseView
  * [ ] Nicer v1.0 photos
@@ -47,8 +47,8 @@ I'm glad you asked! Get the board made via the OSH Park link above, or supply th
 
 ## Hardware (as found in the `hw` subdirectory)
 
-<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">The hardware design of <a property="dct:title" rel="cc:attributionURL" href="https://github.com/dop3j0e/Twonkie">Twonkie</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/dop3j0e">Joachim "dojoe" Fenkes</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg"></a></p>
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/">The hardware design of <a property="dct:title" rel="cc:attributionURL" href="https://github.com/dojoe/Twonkie">Twonkie</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/dojoe">Joachim "dojoe" Fenkes</a> is licensed under <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg"></a></p>
 
 ## Firmware (as found in the `fw` subdirectory)
 
-TODO: Mirror Google's license here
+The source code for the Twonkie's firmware is licensed under the 3-clause BSD license, see [its LICENSE file](fw/LICENSE).

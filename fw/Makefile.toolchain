@@ -1,0 +1,91 @@
+# -*- makefile -*-
+# Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+#
+# Toolchain configuration build system
+#
+
+# Toolchain configuration
+
+min_make_version:=3.82
+make_version_ok:=$(filter $(min_make_version), \
+	$(firstword $(sort $(MAKE_VERSION) $(min_make_version))))
+ifeq ($(make_version_ok),)
+$(error ERROR: GNU make version $(min_make_version) or higher required.)
+endif
+
+# Try not to assume too much about optional tools and prefixes
+CCACHE:=$(shell which ccache 2>/dev/null)
+ifeq ($(origin HOST_CROSS_COMPILE),undefined)
+HOST_CROSS_COMPILE:=$(if $(shell which x86_64-pc-linux-gnu-gcc 2>/dev/null),x86_64-pc-linux-gnu-,)
+endif
+
+CC=$(CCACHE) $(CROSS_COMPILE)gcc
+CPP=$(CCACHE) $(CROSS_COMPILE)cpp
+LD=$(CROSS_COMPILE)ld
+NM=$(CROSS_COMPILE)nm
+OBJCOPY=$(CROSS_COMPILE)objcopy
+OBJDUMP=$(CROSS_COMPILE)objdump
+PKG_CONFIG?=pkg-config
+BUILDCC?=$(CCACHE) gcc
+HOSTCC?=$(CCACHE) $(HOST_CROSS_COMPILE)gcc
+HOSTCXX?=$(CCACHE) $(HOST_CROSS_COMPILE)g++
+
+C_WARN = -Wstrict-prototypes -Wdeclaration-after-statement -Wno-pointer-sign
+COMMON_WARN = -Wall -Werror -Wundef -Wno-trigraphs -fno-strict-aliasing \
+	-fno-common -Werror-implicit-function-declaration \
+	-Wno-format-security -fno-strict-overflow
+CFLAGS_WARN = $(COMMON_WARN) $(C_WARN)
+CXXFLAGS_WARN = $(COMMON_WARN)
+CFLAGS_DEBUG= -g
+CFLAGS_INCLUDE=$(foreach i,$(includes),-I$(i) ) -I.
+CFLAGS_TEST=$(if $(TEST_BUILD),-DTEST_BUILD \
+                               -DTEST_TASKFILE=$(PROJECT).tasklist,) \
+            $(if $(CTS_MODULE), $(CFLAGS_CTS)) \
+            $(if $(CTS_DEBUG), -DCTS_DEBUG=DEFINED) \
+            $(if $(EMU_BUILD),-DEMU_BUILD) \
+            $(if $($(PROJECT)-scale),-DTEST_TIME_SCALE=$($(PROJECT)-scale)) \
+            -DTEST_$(PROJECT) -DTEST_$(UC_PROJECT)
+CFLAGS_COVERAGE=$(if $(TEST_COVERAGE),-fprofile-arcs -ftest-coverage \
+				      -DTEST_COVERAGE,)
+CFLAGS_DEFINE=-DOUTDIR=$(out)/$(BLD) -DCHIP=$(CHIP) -DBOARD_TASKFILE=$(_tsk_lst_file) \
+              -DBOARD=$(BOARD) -DCORE=$(CORE) -DPROJECT=$(PROJECT) \
+              -DCHIP_VARIANT=$(CHIP_VARIANT) -DCHIP_FAMILY=$(CHIP_FAMILY) \
+              -DBOARD_$(UC_BOARD) -DCHIP_$(UC_CHIP) -DCORE_$(UC_CORE) \
+              -DCHIP_VARIANT_$(UC_CHIP_VARIANT) -DCHIP_FAMILY_$(UC_CHIP_FAMILY) \
+	      -DFINAL_OUTDIR=$(out)
+CPPFLAGS=$(CFLAGS_DEFINE) $(CFLAGS_INCLUDE) $(CFLAGS_TEST) \
+	 $(EXTRA_CFLAGS) $(CFLAGS_COVERAGE) $(LATE_CFLAGS_DEFINE) \
+	-DSECTION_IS_$(BLD) -DSECTION=$(BLD) $(CPPFLAGS_$(BLD))
+BUILD_CPPFLAGS=$(CFLAGS_DEFINE) $(CFLAGS_INCLUDE) $(CFLAGS_TEST) \
+	 $(EXTRA_CFLAGS) $(CFLAGS_COVERAGE) $(LATE_CFLAGS_DEFINE) \
+	 -DSECTION_IS_$(BLD) -DSECTION=$(BLD) $(CPPFLAGS_$(BLD))
+HOST_CPPFLAGS=$(CFLAGS_DEFINE) $(CFLAGS_INCLUDE) $(CFLAGS_TEST) \
+	 $(EXTRA_CFLAGS) $(CFLAGS_COVERAGE) $(LATE_CFLAGS_DEFINE) \
+	 -DSECTION_IS_$(BLD) -DSECTION=$(BLD) $(CPPFLAGS_$(BLD))
+ifneq ($(BOARD),host)
+CPPFLAGS+=-ffreestanding -fno-builtin -nostdinc -nostdlib
+CPPFLAGS+=-Ibuiltin/
+endif
+CFLAGS=$(CPPFLAGS) $(CFLAGS_CPU) $(CFLAGS_DEBUG) $(CFLAGS_WARN) $(CFLAGS_y)
+CFLAGS+= -ffunction-sections -fshort-wchar
+CFLAGS+= -fno-delete-null-pointer-checks -fconserve-stack
+CFLAGS+= -DCHROMIUM_EC
+
+FTDIVERSION=$(shell $(PKG_CONFIG) --modversion libftdi1 2>/dev/null)
+ifneq ($(FTDIVERSION),)
+  LIBFTDI_NAME=ftdi1
+else
+  LIBFTDI_NAME=ftdi
+endif
+
+LIBFTDI_CFLAGS=$(shell $(PKG_CONFIG) --cflags lib${LIBFTDI_NAME})
+LIBFTDI_LDLIBS=$(shell $(PKG_CONFIG) --libs   lib${LIBFTDI_NAME})
+
+BUILD_CFLAGS= $(LIBFTDI_CFLAGS) $(BUILD_CPPFLAGS) -O3 $(CFLAGS_DEBUG) $(CFLAGS_WARN)
+HOST_CFLAGS=$(HOST_CPPFLAGS) -O3 $(CFLAGS_DEBUG) $(CFLAGS_WARN) -DHOST_TOOLS_BUILD
+LDFLAGS=-nostdlib -Wl,-X -Wl,--gc-sections -Wl,--build-id=none $(LDFLAGS_EXTRA)
+BUILD_LDFLAGS=$(LIBFTDI_LDLIBS)
+HOST_TEST_LDFLAGS=-T core/host/host_exe.lds -lrt -pthread -rdynamic -lm\
+		  $(if $(TEST_COVERAGE),-fprofile-arcs,)

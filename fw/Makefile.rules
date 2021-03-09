@@ -1,0 +1,503 @@
+# -*- makefile -*-
+# vim: set filetype=make :
+# Copyright (c) 2012 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+#
+# Embedded Controller firmware build system - common targets
+#
+
+FLATSIZE_FILE ?= .sizes.txt
+BUILD_DIR := $(firstword $(subst /, ,$(out)))
+
+build-utils := $(foreach u,$(build-util-bin),$(out)/util/$(u))
+host-utils := $(foreach u,$(host-util-bin),$(out)/util/$(u))
+build-art := $(foreach u,$(build-util-art),$(out)/$(u))
+build-srcs := $(foreach u,$(build-util-bin),$(sort $($(u)-objs:%.o=util/%.c) util/$(u).c))
+host-srcs := $(foreach u,$(host-util-bin),$(sort $($(u)-objs:%.o=util/%.c) util/$(u).c))
+
+# Don't do a build test on the following boards:
+skip_boards = OWNERS host it83xx_evb reef_it8320
+boards := $(filter-out $(skip_boards),$(notdir $(wildcard board/* private*/board/*)))
+
+# Create output directories if necessary
+_common_dir_create := $(foreach d,$(common_dirs),$(shell [ -d $(out)/$(d) ] || \
+	    mkdir -p $(out)/$(d)))
+_sharedlib_dir_create := $(foreach d,$(dirs),$(shell \
+	[ -d $(out)/$(SHOBJLIB)/$(d) ] || mkdir -p $(out)/$(SHOBJLIB)/$(d)))
+_dir_create := $(foreach d,$(dirs),$(shell [ -d $(out)/$(BLD)/$(d) ] || \
+	    mkdir -p $(out)/RO/$(d); mkdir -p $(out)/RW/$(d)))
+_dir_y_create := $(foreach d,$(dirs-y),$(shell [ -d $(out)/$(BLD)/$(d) ] || \
+	    mkdir -p $(out)/RO/$(d); mkdir -p $(out)/RW/$(d)))
+
+# V unset for normal output, V=1 for verbose output, V=0 for silent build
+# (warnings/errors only). Use echo thus: $(call echo,"stuff  to  echo")
+ifeq ($(V),0)
+Q := @
+echo = echo -n;
+quiet = echo -n; $(cmd_$(1))
+silent = 1>/dev/null
+silent_err = 2>/dev/null
+else
+echo = echo $(1);
+ifeq ($(V),)
+Q := @
+quiet = @echo '  $(2)' $(subst $(out)/,,$@) ; $(cmd_$(1))
+silent = 1>/dev/null
+silent_err = 2>/dev/null
+else
+Q :=
+quiet = $(cmd_$(1))
+endif
+endif
+
+# commands to build all targets
+cmd_lds = $(CPP) -P -C -MMD -MF $@.d -MT $@ $(CPPFLAGS) $< -o $@
+cmd_lds_b = $(cmd_lds) -DRW_B_LDS
+# Allow obj_to_bin to be overridden by board or chip specific commands
+cmd_obj_to_bin ?= $(OBJCOPY) --gap-fill=0xff -O binary $^ $(out)/$*.bin.tmp
+cmd_flat_to_obj = $(CC) -T $(out)/firmware_image.lds -nostdlib $(CPPFLAGS) \
+                  -Wl,--build-id=none -o $@ $<
+# Allow the .roshared section to overlap other sections (itself)
+cmd_ec_elf_to_flat ?= $(OBJCOPY) --set-section-flags .roshared=share \
+				-O binary $< $@
+cmd_elf_to_signed ?= sudo $(SIGNER) --key=util/signer/$(3) \
+	--b --input=$< --format=bin --output=$@.signed $(SIGNER_EXTRAS) \
+	&& sudo chown $(shell whoami) $@.signed && mv $@.signed $@
+cmd_elf_to_dis = $(OBJDUMP) -D $< > $@
+cmd_elf_to_hex = $(OBJCOPY) -O ihex $< $@
+cmd_bin_to_hex = $(OBJCOPY) -I binary -O ihex \
+	--change-addresses $(_program_memory_base) $^ $@
+cmd_smap = $(NM) $< | sort > $@
+cmd_elf = $(CC) $(objs) $(libsharedobjs_elf-y) $(LDFLAGS) \
+	-o $@ -Wl,-T,$< -Wl,-Map,$(patsubst %.elf,%.map,$@)
+cmd_exe = $(CC) $(ro-objs) $(HOST_TEST_LDFLAGS) -o $@
+cmd_c_to_o = $(CC) $(CFLAGS) -MMD -MF $@.d -c $< -o $(@D)/$(@F)
+cmd_c_to_build = $(BUILDCC) $(BUILD_CFLAGS) \
+	         $(sort $(foreach c,$($(*F)-objs),util/$(c:%.o=%.c)) $*.c) \
+	         $(BUILD_LDFLAGS) \
+	         -MMD -MF $@.d -o $@
+cmd_c_to_vif = $(BUILDCC) $(BUILD_CFLAGS) $(STANDALONE_FLAGS) \
+		-MMD -MF $@.d -c $< -flto -o $@
+cmd_c_to_host = $(HOSTCC) $(HOST_CFLAGS) $(HOST_LDFLAGS) -MMD -MF $@.d  -o $@ \
+	         $(sort $(foreach c,$($(*F)-objs),util/$(c:%.o=%.c)) $*.c)
+cmd_cxx_to_host = $(HOSTCXX) -std=c++0x $(COMMON_WARN) $(HOST_CXXFLAGS)\
+	-I ./$($(notdir $@)_ROOT) -o $@ $(filter %.cc,$^) $($(notdir $@)_LIBS)
+cmd_host_test = ./util/run_host_test $* $(silent)
+cmd_version = ./util/getversion.sh > $@
+cmd_vif = $(out)/util/genvif -b $(BOARD) -o $(out)
+cmd_mv_from_tmp = mv $(out)/$*.bin.tmp $(out)/$*.bin
+cmd_extractrw-y = dd if=$(out)/$(PROJECT).bin.tmp of=$(out)/$(PROJECT).RW.bin \
+	       bs=1 count=$(_rw_size) skip=$(_rw_off) $(silent_err)
+cmd_copyrw-y = cd $(out) && cp RW/$(PROJECT).RW.flat RW/$(PROJECT).RW.bin
+cmd_sharedlib_elf = $(CC) $(libsharedobjs_deps) \
+	-Wl,-T,common/ec.$(SHOBJLIB).ld $(LDFLAGS) \
+	-o $(out)/$(SHOBJLIB)/$(SHOBJLIB).elf \
+	-Wl,-Map,$(out)/$(SHOBJLIB)/$(SHOBJLIB).map
+
+# commands for RSA signature: rwsig does not need to sign the whole image
+# (it signs the RW part separately). usbpd1 type needs to sign the final image.
+ifeq ($(CONFIG_RWSIG_TYPE_RWSIG),)
+	cmd_rsasign = futility sign --type usbpd1 --pem $(PEM) $(out)/$*.bin.tmp
+else
+	cmd_rsasign =
+endif
+
+cmd_key_extract = futility create $(PEM) $(out)/$* $(silent)
+
+cmd_rsasign_rwsig = futility sign --type rwsig \
+                                    --prikey $(out)/key.vbprik2 $< $@
+
+# commands to build optional xref files
+cmd_deps_to_list = cat $(deps) | tr -d ':\\' | tr ' ' '\012' \
+	| egrep '\.[chS]$$' | sort | uniq > $@
+cmd_etags = etags -o $@ $(shell cat $<)
+cmd_ctags = ctags -o $@ $(shell cat $<)
+targ_if_prog = $(if $(shell which $(1) 2>/dev/null),$(2),)
+
+# By default, the "build_boards" and "try_build_boards" targets will build all
+# of the boards listed in $(boards). However, the invoker can provide a
+# different list via the BOARDS variable. Providing an empty value for BOARDS
+# is not allowed.
+BOARDS ?= $(boards)
+ifeq ($(BOARDS),)
+$(error BOARDS must be non-empty)
+endif
+
+FAILED_BOARDS_DIR = .failedboards
+# When building with -j, it's easy to miss errors. If you don't have your shell
+# configured to warn you about nonzero exit, you may not even notice that "make
+# buildall -j" failed. To make it more obvious, we'll do one level of recursion
+# here.
+.PHONY: try_build_boards
+try_build_boards: $(foreach b, $(BOARDS), proj-$(b))
+
+.PHONY: build_boards
+build_boards:
+	@rm -rf $(FAILED_BOARDS_DIR)
+	@mkdir $(FAILED_BOARDS_DIR)
+	@for b in $(BOARDS); do echo 'starting' > $(FAILED_BOARDS_DIR)/$$b; done
+	$(MAKE) try_build_boards
+
+.PHONY: buildall
+buildall: build_boards
+	$(MAKE) build_cts
+	$(MAKE) runtests
+	@touch .tests-passed
+	@echo "$@ completed successfully!"
+
+showboards:
+	@echo $(sort $(boards))
+
+# Print any important notices at the end of the build.
+.PHONY: notice
+notice: $(config)
+ifeq ($(CONFIG_EXPERIMENTAL_CONSOLE),y)
+ifeq ($(TEST_BUILD),)
+	@echo "*** NOTE: The experimental console is ENABLED. ***"
+	@echo "You will need to run the EC-3PO interactive console in the util"
+	@echo "directory!  Otherwise, you won't be able to enter any commands."
+endif # not a TEST_BUILD
+endif # CONFIG_EXPERIMENTAL_CONSOLE=y
+
+proj-%:
+	@echo 'building' > $(FAILED_BOARDS_DIR)/$*
+	@echo "======= building $*"
+	$(MAKE) --no-print-directory BOARD=$* V=$(V)
+	@rm $(FAILED_BOARDS_DIR)/$*
+
+dis-y := $(out)/RW/$(PROJECT).RW.dis
+dis-$(CONFIG_FW_INCLUDE_RO) += $(out)/RO/$(PROJECT).RO.dis
+dis-$(CONFIG_SHAREDLIB) += $(out)/$(SHOBJLIB)/$(SHOBJLIB).dis
+dis: $(dis-y)
+.PHONY: dis
+
+hex-y := $(out)/RO/$(PROJECT).RO.hex $(out)/RW/$(PROJECT).RW.hex $(out)/$(PROJECT).hex
+hex: $(hex-y)
+.PHONY: hex
+
+.PHONY: utils-art
+utils-art: $(build-art)
+
+.PHONY: utils-host
+utils-host: $(host-utils)
+
+.PHONY: utils-build
+utils-build: $(build-utils)
+
+.PHONY: utils
+utils: utils-host utils-build utils-art
+
+# On board test binaries
+test-targets=$(foreach t,$(test-list-y),test-$(t))
+.PHONY: $(test-targets)
+
+ifeq "$(CONFIG_COMMON_RUNTIME)" "y"
+$(test-targets): test-%:
+	@set -e ; \
+	$(call echo,"  BUILD   $(out)/$*") \
+	$(MAKE) --no-print-directory BOARD=$(BOARD) PROJECT=$* \
+	        V=$(V) out=$(out)/$* TEST_BUILD=y; \
+	cp $(out)/$*/$*.bin $(out)/test-$*.bin
+endif
+
+.PHONY: tests
+tests: $(test-targets)
+
+# Emulator test executables
+host-test-targets=$(foreach t,$(test-list-host),host-$(t))
+run-test-targets=$(foreach t,$(test-list-host),run-$(t))
+.PHONY: $(host-test-targets) $(run-test-targets)
+
+$(host-test-targets): host-%:
+	@set -e ; \
+	$(call echo,"  BUILD   host - build/host/$*") \
+	$(MAKE) --no-print-directory BOARD=host PROJECT=$* \
+	        V=$(V) out=build/host/$* TEST_BUILD=y EMU_BUILD=y $(TEST_FLAG) \
+		CROSS_COMPILE= build/host/$*/$*.exe
+
+$(run-test-targets): run-%: host-%
+	$(call quiet,host_test,TEST   )
+
+.PHONY: hosttests runtests
+hosttests: $(host-test-targets)
+runtests: $(run-test-targets)
+
+cov-test-targets=$(foreach t,$(test-list-host),build/host/$(t).info)
+bldversion=$(shell (./util/getversion.sh ; echo VERSION) | $(CPP) -P)
+
+# lcov fails when multiple instances run at the same time.
+# We need to run them sequentially by using flock
+cmd_lcov=flock /tmp/ec-lcov-lock -c "lcov -q -o $@ -c -d build/host/$*"
+cmd_report_cov=genhtml -q -o build/host/coverage_rpt -t \
+	       "EC Unittest "$(bldversion) $^
+
+build/host/%.info: run-%
+	$(call quiet,lcov,COV    )
+
+.PHONY: coverage
+coverage: TEST_FLAG=TEST_COVERAGE=y
+coverage: $(cov-test-targets)
+	$(call quiet,report_cov,REPORT )
+
+$(out)/firmware_image.lds: common/firmware_image.lds.S
+	$(call quiet,lds,LDS    )
+$(out)/%.lds: core/$(CORE)/ec.lds.S
+	$(call quiet,lds,LDS    )
+
+$(out)/%_B.lds: core/$(CORE)/ec.lds.S
+	$(call quiet,lds_b,LDS_B  )
+
+$(out)/%.bin: $(out)/%.obj
+	$(call quiet,obj_to_bin,OBJCOPY)
+	$(if $(wildcard $(PEM)),$(call quiet,rsasign,SIGN   ),)
+	$(if $(wildcard $(PEM)),$(call quiet,extractrw-y,EXTR_RW), \
+			$(call quiet,copyrw-y,COPY_RW))
+	$(call quiet,mv_from_tmp,MV     )
+
+$(out)/$(BOARD)_vif.txt: $(out)/util/genvif
+	$(call quiet,vif,VIF    )
+
+flat-y := $(out)/RW/$(PROJECT).RW.flat
+flat-$(CONFIG_FW_INCLUDE_RO) += $(out)/RO/$(PROJECT).RO.flat
+
+deps += $(out)/firmware_image.lds.d $(flat-y:%.flat=%.lds.d)
+
+flat-$(CONFIG_RWSIG_TYPE_RWSIG) += $(out)/key.vbpubk2
+flat-$(CONFIG_RWSIG_TYPE_RWSIG) += $(out)/RW/$(PROJECT).RW.flat.sig
+
+flat-$(CONFIG_SHAREDLIB) += $(libsharedobjs-y)
+
+$(out)/$(PROJECT).obj: common/firmware_image.S $(out)/firmware_image.lds \
+	$(flat-y)
+	$(call quiet,flat_to_obj,CAT    )
+
+$(out)/%.dis: $(out)/%.elf
+	$(call quiet,elf_to_dis,OBJDUMP)
+
+$(out)/RW/%.hex: $(out)/RW/%.elf $(out)/RW/%.smap
+	$(call quiet,elf_to_hex,OBJCOPY)
+
+ifeq ($(SIGNED_IMAGES),)
+$(out)/%.flat: $(out)/%.elf $(out)/%.smap utils-build
+	$(call quiet,ec_elf_to_flat,OBJCOPY)
+
+$(out)/RO/%.hex: $(out)/RO/%.elf $(out)/RO/%.smap
+	$(call quiet,elf_to_hex,OBJCOPY)
+else
+$(out)/RO/%.flat: $(out)/RO/%.elf  $(out)/RO/%.smap
+	$(call quiet,elf_to_signed,RO_SIGN,$(CR50_RO_KEY))
+
+$(out)/RW/%.flat: $(out)/RW/%.elf  $(out)/RW/%.smap
+	$(call quiet,elf_to_signed,RW_SIGN,$(CR50_RW_KEY))
+
+$(out)/RO/%.hex: $(out)/RO/%.flat
+	$(call quiet,bin_to_hex,OBJCOPY)
+endif
+$(out)/$(PROJECT).hex: $(out)/$(PROJECT).bin
+	$(call quiet,bin_to_hex,OBJCOPY)
+
+$(out)/%.vbprik2 $(out)/%.vbpubk2: $(PEM)
+	$(call quiet,key_extract,KEY    )
+
+$(out)/RW/%.flat.sig: $(out)/RW/%.flat $(out)/key.vbprik2
+	$(call quiet,rsasign_rwsig,SIGN   )
+
+$(out)/RW/%.elf: override BLD:=RW
+$(out)/RW/%.elf: private objs := $(rw-objs)
+$(out)/RW/%.elf: $(out)/RW/%.lds $(rw-objs) $(libsharedobjs_elf-y)
+	$(call quiet,elf,LD     )
+
+$(out)/RO/%.elf: override BLD:=RO
+$(out)/RO/%.elf: private objs := $(ro-objs)
+$(out)/RO/%.elf: $(out)/RO/%.lds $(ro-objs) $(libsharedobjs_elf-y)
+	$(call quiet,elf,LD     )
+
+$(out)/%.elf: $(out)/%.lds $(objs)
+	$(call quiet,elf,LD     )
+
+$(out)/$(SHOBJLIB)/$(SHOBJLIB).elf: $(sharedlib-objs)
+	@mkdir -p $(out)/$(SHOBJLIB)
+	$(call quiet,sharedlib_elf,LD     )
+
+$(out)/%.smap: $(out)/%.elf
+	$(call quiet,smap,NM     )
+
+$(out)/$(PROJECT).exe: $(ro-objs)
+	$(call quiet,exe,EXE    )
+
+$(out)/RO/%.o:%.c
+	$(call quiet,c_to_o,CC     )
+$(out)/RW/%.o:%.c
+	$(call quiet,c_to_o,CC     )
+
+$(out)/$(SHOBJLIB)/%.o: override LATE_CFLAGS_DEFINE:=-DSHAREDLIB_IMAGE
+$(out)/$(SHOBJLIB)/%.o:%.c
+	$(call quiet,c_to_o,CC     )
+
+$(out)/RO/%.o:%.S
+	$(call quiet,c_to_o,AS     )
+$(out)/RW/%.o:%.S
+	$(call quiet,c_to_o,AS     )
+
+
+# Conditionally force the rebuilding of ec_version.h only if it would be
+# changed.
+old_version_hash := $(shell cat $(out)/ec_version.h 2> /dev/null | md5sum -)
+new_version_hash := $(shell BOARD=$(BOARD) ./util/getversion.sh | md5sum -)
+
+ifneq ($(old_version_hash),$(new_version_hash))
+.PHONY: $(out)/ec_version.h
+endif
+
+# All of the objects have an order only dependency on the ec_version header.
+# This ensures that if ec_version.h needs to be built (because it was marked
+# PHONY above) then it will be rebuilt before any objects.  This is important
+# because some source files will include ec_version.h and fail to compile if
+# it doesn't already exist.  This dependency shouldn't be a normal dependency
+# because that would cause every object to be rebuilt when ec_version.h
+# changes, instead of just the ones that actually depend on it.  The objects
+# that truly depend on ec_version.h will have that information encoded in their
+# .d file.
+$(ro-objs): | $(out)/ec_version.h
+$(rw-objs): | $(out)/ec_version.h
+$(sharedlib-objs): | $(out)/ec_version.h
+
+$(out)/ec_version.h:
+	$(call quiet,version,VERSION)
+
+$(build-utils): $(out)/%:$(build-srcs)
+	$(call quiet,c_to_build,BUILDCC)
+
+$(host-utils): $(out)/%:$(host-srcs)
+	$(call quiet,c_to_host,HOSTCC )
+
+$(out)/cscope.files: $(out)/$(PROJECT).bin
+	$(call quiet,deps_to_list,SH     )
+
+$(out)/TAGS: $(out)/cscope.files
+	$(call quiet,etags,ETAGS  )
+
+$(out)/tags: $(out)/cscope.files
+	$(call quiet,ctags,CTAGS  )
+
+# TODO: optional make rules for PROJECT_EXTRA
+$(npcx-flash-fw-bin):
+	$(if $(V),,@echo '  EXTBIN ' $(subst $(out)/,,$@) ; )
+	-@ mkdir -p $(@D)
+	-@ $(CC) $(CFLAGS) -MMD -MF $(out)/$(npcx-lfw).d -c $(npcx-flash-fw).c \
+		-o $(out)/$(npcx-flash-fw).o
+	-@ $(CC) $(out)/$(npcx-flash-fw).o $(LDFLAGS) \
+		-o $(out)/$(npcx-flash-fw).elf -Wl,-T,$(npcx-flash-fw).ld \
+		-Wl,-Map,$(out)/$(npcx-flash-fw).map
+	-@ $(OBJCOPY) -O binary $(out)/$(npcx-flash-fw).elf $@
+
+.PHONY: xrefs
+xrefs: $(call targ_if_prog,etags,$(out)/TAGS) \
+	$(call targ_if_prog,ctags,$(out)/tags)
+
+.PHONY: flash
+flash: $(out)/ec.bin
+	openocd -c "set BOARD $(BOARD)"\
+		-c "set BUILD_DIR $(out)"\
+		-f $(BDIR)/openocd-flash.cfg
+
+.PHONY: flash_ec
+flash_ec: $(out)/ec.bin
+	./util/flash_ec --board $(BOARD) --image $(out)/ec.bin
+
+.PHONY: flash_dfu
+flash_dfu: $(out)/ec.bin
+	sudo ./$(BDIR)/dfu $(out)/ec.bin
+
+.PHONY: clean
+clean:
+	-rm -rf $(out)
+
+.PHONY: clobber
+clobber:
+	-rm -rf build TAGS cscope.files cscope.out
+ifneq ($(CCACHE),)
+	$(CCACHE) -c
+endif
+
+.PHONY: help
+help:
+	@echo "Google Chromium EC build"
+	@echo "Common Targets:"
+	@echo "  all   [BOARD=]     - Build a single board (Default target)"
+	@echo "  clean [BOARD=]     - Clean a single board"
+	@echo "  buildall           - Build and test all boards"
+	@echo "  clobber            - Clean all boards"
+	@echo "  proj-<boardname>   - Build a single board (similar to 'all BOARD=boardname')"
+	@echo "  savesizes          - Save the filesizes of currently built boards for comparison"
+	@echo "  newsizes           - Compare previously saved filesizes against new sizes"
+	@echo "Common Variables:"
+	@echo "  BOARD=             - Set the board name to build (Default is $(BOARD))"
+	@echo "  CROSS_COMPILE=     - Set the compiler for the board"
+	@echo "  V=1                - Show make output"
+	@echo "Example:"
+	@echo "  make BOARD=reef CROSS_COMPILE='arm-eabi-'"
+
+.PHONY: savesizes
+savesizes:
+	@find $(BUILD_DIR) -name '*.flat' -printf "%s %p\n" | sort --key 2 > \
+		$(FLATSIZE_FILE)
+	@if [ -s $(FLATSIZE_FILE) ]; then \
+		echo "Saved sizes for $$(cat $(FLATSIZE_FILE) | wc -l) files"; \
+	else \
+		echo "Error: No file sizes saved.  Are they built?"; \
+	fi
+
+.PHONY: newsizes
+newsizes:
+	@if [ ! -s "$(FLATSIZE_FILE)" ]; then \
+		echo "Error: no saved size file ($(FLATSIZE_FILE))."; \
+		echo " Run 'make savesizes' first"; \
+		exit 1; \
+	fi
+	@FILES_CHANGED=0; \
+	FILES_IN_LIST=0; \
+	FILES_COMPARED=0; \
+	FILE_SIZE_CHANGE=0; \
+	NEW_SIZES=$$(find $(BUILD_DIR) -name '*.flat' -printf "%s %p\n"); \
+	while read -r -u 10 line; do \
+		FILES_IN_LIST=$$((FILES_IN_LIST+1)); \
+		FLATFILE=$$(echo "$$line" | cut -f2 -d ' '); \
+		FLATSIZE_ORG=$$(echo "$$line" | cut -f1 -d ' '); \
+		FLATSIZE_NEW="$$(grep "$$FLATFILE" <<< "$$NEW_SIZES" | \
+			sed 's/ .*$$//')"; \
+		if [ -n "$$FLATSIZE_NEW" ]; then \
+			FILES_COMPARED=$$((FILES_COMPARED+1)); \
+			if [ "$$FLATSIZE_NEW" -gt "$$FLATSIZE_ORG" ]; then \
+				FILES_CHANGED=$$((FILES_CHANGED+1)); \
+				FILE_SIZE_CHANGE=$$((FILE_SIZE_CHANGE+ \
+				FLATSIZE_NEW-FLATSIZE_ORG)); \
+				printf "%s grew by %s bytes: (%d to %d)\n" \
+					"$$FLATFILE" \
+					"$$((FLATSIZE_NEW-FLATSIZE_ORG))" \
+					"$$FLATSIZE_ORG" "$$FLATSIZE_NEW"; \
+			elif [ "$$FLATSIZE_NEW" -lt "$$FLATSIZE_ORG" ]; then \
+				FILES_CHANGED=$$((FILES_CHANGED+1)); \
+				FILE_SIZE_CHANGE=$$((FILE_SIZE_CHANGE+ \
+				FLATSIZE_NEW-FLATSIZE_ORG)); \
+				printf "%s shrank by %s bytes: (%d to %d)\n" \
+					"$$FLATFILE" \
+					"$$((FLATSIZE_ORG-FLATSIZE_NEW))" \
+					"$$FLATSIZE_ORG" "$$FLATSIZE_NEW"; \
+			fi; \
+		fi; \
+	done 10< "$(FLATSIZE_FILE)"; \
+	echo "Compared $$FILES_COMPARED of $$FILES_IN_LIST files."; \
+	if [ $$FILES_COMPARED -ne 0 ] && [ $$FILES_CHANGED -eq 0 ]; then \
+		echo "File sizes are unchanged."; \
+	else \
+		printf "%d files changed.\n" "$$FILES_CHANGED"; \
+		printf "Total size change: %s bytes.\n" "$$FILE_SIZE_CHANGE"; \
+		printf "Average size change: %d bytes.\n" \
+			"$$((FILE_SIZE_CHANGE / FILES_CHANGED))"; \
+	fi
+
+.SECONDARY:
+
+-include $(deps)
