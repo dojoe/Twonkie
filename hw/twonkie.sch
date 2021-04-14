@@ -42,20 +42,6 @@ F 6 "629105150521" H 4300 7100 50  0001 C CNN "Mfg P/N"
 	1    0    0    -1  
 $EndComp
 $Comp
-L MCU_ST_STM32F0:STM32F042C6Tx U4
-U 1 1 5F88E97E
-P 9000 4750
-F 0 "U4" H 9000 4700 50  0000 C CNN
-F 1 "STM32F072CB" H 9000 4600 50  0000 C CNN
-F 2 "twonkie:LQFP-48_7x7mm_P0.5mm-QFN48-Frankenstein" H 8500 3350 50  0001 R CNN
-F 3 "https://www.analog.com/media/en/technical-documentation/data-sheets/AD8610_8620.pdf" H 9000 4750 50  0001 C CNN
-F 4 "497-19319-1-ND" H 9000 4750 50  0001 C CNN "DigiKey P/N"
-F 5 "STMicro" H 9000 4750 50  0001 C CNN "Manufacturer"
-F 6 "STM32F042C6T6TR" H 9000 4750 50  0001 C CNN "Mfg P/N"
-	1    9000 4750
-	1    0    0    -1  
-$EndComp
-$Comp
 L Device:LED_RABG DS1
 U 1 1 5F8909EA
 P 9200 1100
@@ -508,174 +494,6 @@ F 3 "" H 4700 950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C_Small C2
-U 1 1 5FB990AE
-P 9800 3050
-F 0 "C2" H 9892 3096 50  0000 L CNN
-F 1 "4.7u" H 9892 3005 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder" H 9800 3050 50  0001 C CNN
-F 3 "~" H 9800 3050 50  0001 C CNN
-F 4 "1276-1481-1-ND" H 9800 3050 50  0001 C CNN "DigiKey P/N"
-F 5 "Samsung Electro-Mechanics" H 9800 3050 50  0001 C CNN "Manufacturer"
-F 6 "CL05A475KQ5NRNC" H 9800 3050 50  0001 C CNN "Mfg P/N"
-	1    9800 3050
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C_Small C3
-U 1 1 5FB9A3C4
-P 10150 3050
-F 0 "C3" H 10242 3096 50  0000 L CNN
-F 1 "100n" H 10242 3005 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder" H 10150 3050 50  0001 C CNN
-F 3 "~" H 10150 3050 50  0001 C CNN
-F 4 "1276-6720-1-ND" H 10150 3050 50  0001 C CNN "DigiKey P/N"
-F 5 "Samsung Electro-Mechanics" H 10150 3050 50  0001 C CNN "Manufacturer"
-F 6 "CL05B104KA5NNNC" H 10150 3050 50  0001 C CNN "Mfg P/N"
-	1    10150 3050
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C_Small C4
-U 1 1 5FB9A628
-P 10500 3050
-F 0 "C4" H 10592 3096 50  0000 L CNN
-F 1 "100n" H 10592 3005 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder" H 10500 3050 50  0001 C CNN
-F 3 "~" H 10500 3050 50  0001 C CNN
-F 4 "1276-6720-1-ND" H 10500 3050 50  0001 C CNN "DigiKey P/N"
-F 5 "Samsung Electro-Mechanics" H 10500 3050 50  0001 C CNN "Manufacturer"
-F 6 "CL05B104KA5NNNC" H 10500 3050 50  0001 C CNN "Mfg P/N"
-	1    10500 3050
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C_Small C7
-U 1 1 5FBA1F4D
-P 10150 3950
-F 0 "C7" H 10242 3996 50  0000 L CNN
-F 1 "4.7u" H 10242 3905 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder" H 10150 3950 50  0001 C CNN
-F 3 "~" H 10150 3950 50  0001 C CNN
-F 4 "1276-1481-1-ND" H 10150 3950 50  0001 C CNN "DigiKey P/N"
-F 5 "Samsung Electro-Mechanics" H 10150 3950 50  0001 C CNN "Manufacturer"
-F 6 "CL05A475KQ5NRNC" H 10150 3950 50  0001 C CNN "Mfg P/N"
-	1    10150 3950
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C_Small C8
-U 1 1 5FBA1F59
-P 10500 3950
-F 0 "C8" H 10592 3996 50  0000 L CNN
-F 1 "100n" H 10592 3905 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder" H 10500 3950 50  0001 C CNN
-F 3 "~" H 10500 3950 50  0001 C CNN
-F 4 "1276-6720-1-ND" H 10500 3950 50  0001 C CNN "DigiKey P/N"
-F 5 "Samsung Electro-Mechanics" H 10500 3950 50  0001 C CNN "Manufacturer"
-F 6 "CL05B104KA5NNNC" H 10500 3950 50  0001 C CNN "Mfg P/N"
-	1    10500 3950
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:Ferrite_Bead_Small FB2
-U 1 1 5FBAB756
-P 10450 3400
-F 0 "FB2" V 10600 3350 50  0000 C CNN
-F 1 "600@100MHz" V 10700 3450 50  0000 C CNN
-F 2 "Inductor_SMD:L_0402_1005Metric_Pad0.77x0.64mm_HandSolder" V 10380 3400 50  0001 C CNN
-F 3 "~" H 10450 3400 50  0001 C CNN
-F 4 "490-1006-1-ND" H 10450 3400 50  0001 C CNN "DigiKey P/N"
-F 5 "BLM15AG601SN1D" H 10450 3400 50  0001 C CNN "Mfg P/N"
-F 6 "MuRata" H 10450 3400 50  0001 C CNN "Manufacturer"
-	1    10450 3400
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	10500 2950 10150 2950
-Wire Wire Line
-	10150 2950 9800 2950
-Connection ~ 10150 2950
-Wire Wire Line
-	10500 3150 10150 3150
-Wire Wire Line
-	9800 3150 10150 3150
-Connection ~ 10150 3150
-Wire Wire Line
-	9000 3350 8900 3350
-Wire Wire Line
-	8900 3350 8800 3350
-Connection ~ 8900 3350
-$Comp
-L power:+3V3 #PWR0119
-U 1 1 5FC5F0A3
-P 10800 2900
-F 0 "#PWR0119" H 10800 2750 50  0001 C CNN
-F 1 "+3V3" H 10815 3073 50  0000 C CNN
-F 2 "" H 10800 2900 50  0001 C CNN
-F 3 "" H 10800 2900 50  0001 C CNN
-	1    10800 2900
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	10800 2900 10800 2950
-Wire Wire Line
-	10800 2950 10500 2950
-Connection ~ 10500 2950
-Wire Wire Line
-	10800 3850 10500 3850
-Connection ~ 10500 3850
-Wire Wire Line
-	10150 3850 10500 3850
-Wire Wire Line
-	10150 4050 10500 4050
-$Comp
-L power:GND #PWR0120
-U 1 1 5FCC1FA0
-P 10500 4050
-F 0 "#PWR0120" H 10500 3800 50  0001 C CNN
-F 1 "GND" H 10505 3877 50  0000 C CNN
-F 2 "" H 10500 4050 50  0001 C CNN
-F 3 "" H 10500 4050 50  0001 C CNN
-	1    10500 4050
-	1    0    0    -1  
-$EndComp
-Connection ~ 10800 2950
-Wire Wire Line
-	10150 3850 9600 3850
-Wire Wire Line
-	9600 3850 9600 3350
-Wire Wire Line
-	9600 3350 9200 3350
-Connection ~ 10150 3850
-Wire Wire Line
-	9100 3250 9100 3350
-Wire Wire Line
-	9800 2950 8900 2950
-Wire Wire Line
-	8900 2950 8900 3350
-Connection ~ 9800 2950
-Wire Wire Line
-	8800 6250 8900 6250
-Connection ~ 8900 6250
-Wire Wire Line
-	8900 6250 9000 6250
-Connection ~ 9000 6250
-Wire Wire Line
-	9000 6250 9100 6250
-$Comp
-L power:GND #PWR0121
-U 1 1 5FD156A7
-P 9100 6250
-F 0 "#PWR0121" H 9100 6000 50  0001 C CNN
-F 1 "GND" H 9105 6077 50  0000 C CNN
-F 2 "" H 9100 6250 50  0001 C CNN
-F 3 "" H 9100 6250 50  0001 C CNN
-	1    9100 6250
-	1    0    0    -1  
-$EndComp
-Connection ~ 9100 6250
-$Comp
 L Sensor:INA260 U1
 U 1 1 5F894AA2
 P 2200 6200
@@ -690,20 +508,6 @@ F 7 "INA260AIPWR" H 2200 6200 50  0001 C CNN "Mfg P/N"
 	1    2200 6200
 	0    -1   1    0   
 $EndComp
-Connection ~ 10500 4050
-$Comp
-L power:GND #PWR0123
-U 1 1 5FD198DB
-P 10150 3150
-F 0 "#PWR0123" H 10150 2900 50  0001 C CNN
-F 1 "GND" H 10155 2977 50  0000 C CNN
-F 2 "" H 10150 3150 50  0001 C CNN
-F 3 "" H 10150 3150 50  0001 C CNN
-	1    10150 3150
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	9700 3400 9700 3250
 Wire Wire Line
 	9000 1600 9000 1700
 Wire Wire Line
@@ -813,35 +617,21 @@ F 6 "Yageo" H 10550 1450 50  0001 C CNN "Manufacturer"
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	8400 3750 7500 3750
-Wire Wire Line
-	8400 3850 7500 3850
-Text Label 7500 3750 0    50   ~ 0
-OSC_IN
+	8400 3950 7500 3950
 Text Label 7500 3850 0    50   ~ 0
-OSC_OUT
+OSC_IN
 Text Label 7500 3950 0    50   ~ 0
+OSC_OUT
+Text Label 7500 3650 0    50   ~ 0
 BOOT
 Wire Wire Line
 	8400 4550 7500 4550
-Wire Wire Line
-	7500 4650 8400 4650
-Wire Wire Line
-	8400 4750 7500 4750
-Wire Wire Line
-	7500 4850 8400 4850
 Text Label 7500 5750 0    50   ~ 0
 CC2_RPUSB
-Text Label 10500 5950 2    50   ~ 0
-CC1_TX_EN
 Text Label 7500 4750 0    50   ~ 0
 VBUS_ALERT_L
 Text Label 7500 4150 0    50   ~ 0
 CC2_TX_EN
-Wire Wire Line
-	8400 4950 7500 4950
-Wire Wire Line
-	7500 5050 8400 5050
 Text Label 7500 4950 0    50   ~ 0
 CC1_TX_DATA
 Text Label 7500 4850 0    50   ~ 0
@@ -850,146 +640,40 @@ Text Label 7500 5150 0    50   ~ 0
 INA_SCL
 Text Label 7500 5250 0    50   ~ 0
 INA_SDA
-Wire Wire Line
-	8400 5350 7500 5350
-Wire Wire Line
-	7500 5450 8400 5450
-Wire Wire Line
-	7500 5650 8400 5650
 Text Label 7500 5850 0    50   ~ 0
 CC2_RD
 Text Label 7500 5450 0    50   ~ 0
 TX_CLK
 Text Label 7500 5650 0    50   ~ 0
 LED_R_L
-Wire Wire Line
-	7500 5850 8400 5850
-Wire Wire Line
-	8400 5950 7500 5950
-Wire Wire Line
-	7500 6050 8400 6050
 Text Label 7500 5950 0    50   ~ 0
 LED_B_L
-Text Label 10500 5350 2    50   ~ 0
-CC2_RA
-Wire Wire Line
-	9600 4550 10500 4550
-Wire Wire Line
-	10500 4650 9600 4650
-Wire Wire Line
-	9600 4750 10500 4750
-Wire Wire Line
-	10500 4850 9600 4850
-Text Label 10500 4550 2    50   ~ 0
-CC1_EN
-Text Label 10500 4650 2    50   ~ 0
-CC1_BUF
-Text Label 10500 4750 2    50   ~ 0
-CC2_EN
-Text Label 10500 4850 2    50   ~ 0
-CC2_BUF
-Wire Wire Line
-	9600 4950 10500 4950
-Wire Wire Line
-	10500 5050 9600 5050
-Wire Wire Line
-	9600 5150 10500 5150
-Wire Wire Line
-	10500 5250 9600 5250
-Text Label 10500 4950 2    50   ~ 0
-DAC
-Text Label 10500 5050 2    50   ~ 0
-TX_CLK
-Wire Wire Line
-	9600 5350 10500 5350
-Wire Wire Line
-	10500 5450 9600 5450
-Wire Wire Line
-	9600 5550 10500 5550
-Wire Wire Line
-	10500 5650 9600 5650
 Text Label 7500 5350 0    50   ~ 0
 CC1_RA
-Text Label 10500 5450 2    50   ~ 0
-UART_TX
-Text Label 10500 5550 2    50   ~ 0
-UART_RX
-Text Label 10500 5650 2    50   ~ 0
-USB_B_D-
-Wire Wire Line
-	9600 5750 10500 5750
-Wire Wire Line
-	10500 5850 9600 5850
-Wire Wire Line
-	9600 5950 10500 5950
-Wire Wire Line
-	10500 6050 9600 6050
-Text Label 10500 5750 2    50   ~ 0
-USB_B_D+
 Text Label 7500 5050 0    50   ~ 0
 CC1_RP1A5
 Text Label 7500 4250 0    50   ~ 0
 CC1_RP3A0
-Wire Wire Line
-	8400 3550 7500 3550
-Text Label 7500 3550 0    50   ~ 0
+Text Label 7500 3450 0    50   ~ 0
 NRST
 $Comp
 L Connector:TestPoint TP1
 U 1 1 5FE22EC0
-P 7500 3550
-F 0 "TP1" V 7500 3800 50  0000 C CNN
-F 1 "TestPoint" V 7604 3622 50  0001 C CNN
-F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 7700 3550 50  0001 C CNN
-F 3 "~" H 7700 3550 50  0001 C CNN
-F 4 "-" H 7500 3550 50  0001 C CNN "DigiKey P/N"
-F 5 "-" H 7500 3550 50  0001 C CNN "Manufacturer"
-F 6 "-" H 7500 3550 50  0001 C CNN "Mfg P/N"
-	1    7500 3550
+P 7500 3450
+F 0 "TP1" V 7500 3700 50  0000 C CNN
+F 1 "TestPoint" V 7604 3522 50  0001 C CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 7700 3450 50  0001 C CNN
+F 3 "~" H 7700 3450 50  0001 C CNN
+F 4 "-" H 7500 3450 50  0001 C CNN "DigiKey P/N"
+F 5 "-" H 7500 3450 50  0001 C CNN "Manufacturer"
+F 6 "-" H 7500 3450 50  0001 C CNN "Mfg P/N"
+	1    7500 3450
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	8400 4350 7500 4350
-Wire Wire Line
-	8400 4250 7500 4250
-Wire Wire Line
 	8400 4150 7500 4150
-Text Label 10500 5850 2    50   ~ 0
-CC2_RP3A0
-Wire Wire Line
-	8400 5550 7500 5550
-Wire Wire Line
-	8400 5750 7500 5750
 Text Label 7500 5550 0    50   ~ 0
 LED_G_L
-$Comp
-L Connector:TestPoint TP2
-U 1 1 5FEEE9C1
-P 10500 5450
-F 0 "TP2" V 10500 5700 50  0000 C CNN
-F 1 "TestPoint" V 10604 5522 50  0001 C CNN
-F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 10700 5450 50  0001 C CNN
-F 3 "~" H 10700 5450 50  0001 C CNN
-F 4 "-" H 10500 5450 50  0001 C CNN "DigiKey P/N"
-F 5 "-" H 10500 5450 50  0001 C CNN "Manufacturer"
-F 6 "-" H 10500 5450 50  0001 C CNN "Mfg P/N"
-	1    10500 5450
-	0    1    1    0   
-$EndComp
-$Comp
-L Connector:TestPoint TP3
-U 1 1 5FEEFA7D
-P 10500 5550
-F 0 "TP3" V 10500 5800 50  0000 C CNN
-F 1 "TestPoint" V 10604 5622 50  0001 C CNN
-F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 10700 5550 50  0001 C CNN
-F 3 "~" H 10700 5550 50  0001 C CNN
-F 4 "-" H 10500 5550 50  0001 C CNN "DigiKey P/N"
-F 5 "-" H 10500 5550 50  0001 C CNN "Manufacturer"
-F 6 "-" H 10500 5550 50  0001 C CNN "Mfg P/N"
-	1    10500 5550
-	0    1    1    0   
-$EndComp
 $Comp
 L Device:R R22
 U 1 1 5FA9841C
@@ -1534,7 +1218,6 @@ F 5 "Yageo" H 3100 950 50  0001 C CNN "Manufacturer"
 	1    3100 950 
 	-1   0    0    1   
 $EndComp
-NoConn ~ 10500 4950
 $Comp
 L power:PWR_FLAG #FLG0101
 U 1 1 6024BFA9
@@ -1544,17 +1227,6 @@ F 1 "PWR_FLAG" V 5500 7200 50  0000 C CNN
 F 2 "" H 5500 6900 50  0001 C CNN
 F 3 "~" H 5500 6900 50  0001 C CNN
 	1    5500 6900
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:PWR_FLAG #FLG0102
-U 1 1 6024CE31
-P 10350 3400
-F 0 "#FLG0102" H 10350 3475 50  0001 C CNN
-F 1 "PWR_FLAG" H 10450 3550 50  0000 C CNN
-F 2 "" H 10350 3400 50  0001 C CNN
-F 3 "~" H 10350 3400 50  0001 C CNN
-	1    10350 3400
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -1568,8 +1240,6 @@ Wire Notes Line
 	8500 2550 8500 500 
 Wire Notes Line
 	3850 6250 6950 6250
-Text Notes 9600 2850 2    98   ~ 0
-Microcontroller
 Text Notes 10350 2350 2    98   ~ 0
 Indicator LEDs
 Text Notes 3800 2350 0    98   ~ 0
@@ -1701,73 +1371,9 @@ Text Label 7500 6050 0    50   ~ 0
 CC2_RP1A5
 NoConn ~ 7500 4550
 NoConn ~ 7500 4650
-NoConn ~ 7500 3750
 NoConn ~ 7500 3850
-Text Label 10500 5250 2    50   ~ 0
-VCONN_ALERT_L
-Text Label 10500 5150 2    50   ~ 0
-CC2_TX_DATA
-Text Label 10500 6050 2    50   ~ 0
-CC1_RPUSB
+NoConn ~ 7500 3950
 NoConn ~ 7500 4350
-Connection ~ 10050 3600
-$Comp
-L power:GND #PWR0122
-U 1 1 5FD19620
-P 10050 3600
-F 0 "#PWR0122" H 10050 3350 50  0001 C CNN
-F 1 "GND" H 10055 3427 50  0000 C CNN
-F 2 "" H 10050 3600 50  0001 C CNN
-F 3 "" H 10050 3600 50  0001 C CNN
-	1    10050 3600
-	1    0    0    -1  
-$EndComp
-Connection ~ 10050 3400
-Wire Wire Line
-	10350 3400 10050 3400
-Wire Wire Line
-	10050 3600 9700 3600
-Wire Wire Line
-	10050 3400 9700 3400
-$Comp
-L Device:C_Small C6
-U 1 1 5FBA71D9
-P 10050 3500
-F 0 "C6" H 10142 3546 50  0000 L CNN
-F 1 "10n" H 10142 3455 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder" H 10050 3500 50  0001 C CNN
-F 3 "~" H 10050 3500 50  0001 C CNN
-F 4 "1276-1028-1-ND" H 10050 3500 50  0001 C CNN "DigiKey P/N"
-F 5 "Samsung Electro-Mechanics" H 10050 3500 50  0001 C CNN "Manufacturer"
-F 6 "CL05B103KB5NNNC" H 10050 3500 50  0001 C CNN "Mfg P/N"
-	1    10050 3500
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C_Small C5
-U 1 1 5FBA71D3
-P 9700 3500
-F 0 "C5" H 9792 3546 50  0000 L CNN
-F 1 "1u" H 9792 3455 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder" H 9700 3500 50  0001 C CNN
-F 3 "~" H 9700 3500 50  0001 C CNN
-F 4 "1276-1235-1-ND" H 9700 3500 50  0001 C CNN "DigiKey P/N"
-F 5 "Samsung Electro-Mechanics" H 9700 3500 50  0001 C CNN "Manufacturer"
-F 6 "CL05A105MQ5NNNC" H 9700 3500 50  0001 C CNN "Mfg P/N"
-	1    9700 3500
-	1    0    0    -1  
-$EndComp
-Connection ~ 9700 3400
-Wire Wire Line
-	10800 2950 10800 3400
-Wire Wire Line
-	10800 3400 10550 3400
-Connection ~ 10800 3400
-Wire Wire Line
-	10800 3400 10800 3850
-Connection ~ 10350 3400
-Wire Wire Line
-	9100 3250 9700 3250
 $Comp
 L Device:R R25
 U 1 1 5FEB3ABD
@@ -1817,12 +1423,6 @@ Connection ~ 7250 4700
 Wire Wire Line
 	7400 5000 7400 5150
 Wire Wire Line
-	7400 5150 8400 5150
-Wire Wire Line
-	7100 5250 8400 5250
-Wire Wire Line
-	7500 3950 8400 3950
-Wire Wire Line
 	4600 7300 4950 7300
 Text Label 4950 7300 2    50   ~ 0
 USB_B_ID
@@ -1830,7 +1430,7 @@ Wire Notes Line
 	5600 5150 5600 2550
 Wire Notes Line
 	5600 5150 6950 5150
-Text Notes 5650 3050 0    39   ~ 0
+Text Notes 5650 3050 0    43   ~ 0
 Use A-to-A cable plugged into\nOTG adapter for bootloader mode,\nor use normal Micro-B cable and\nhold SW1 while plugging.
 Text Notes 6900 2750 2    98   ~ 0
 Bootloader mode
@@ -1953,4 +1553,406 @@ F 6 "Yageo" H 6400 3550 50  0001 C CNN "Manufacturer"
 	1    6400 3550
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	9200 3150 9800 3150
+Connection ~ 10450 3300
+Wire Wire Line
+	10900 3300 10900 3750
+Connection ~ 10900 3300
+Wire Wire Line
+	10900 3300 10650 3300
+Wire Wire Line
+	10900 2850 10900 3300
+Connection ~ 9800 3300
+$Comp
+L Device:C_Small C5
+U 1 1 5FBA71D3
+P 9800 3400
+F 0 "C5" H 9892 3446 50  0000 L CNN
+F 1 "1u" H 9892 3355 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder" H 9800 3400 50  0001 C CNN
+F 3 "~" H 9800 3400 50  0001 C CNN
+F 4 "1276-1235-1-ND" H 9800 3400 50  0001 C CNN "DigiKey P/N"
+F 5 "Samsung Electro-Mechanics" H 9800 3400 50  0001 C CNN "Manufacturer"
+F 6 "CL05A105MQ5NNNC" H 9800 3400 50  0001 C CNN "Mfg P/N"
+	1    9800 3400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C6
+U 1 1 5FBA71D9
+P 10150 3400
+F 0 "C6" H 10242 3446 50  0000 L CNN
+F 1 "10n" H 10242 3355 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder" H 10150 3400 50  0001 C CNN
+F 3 "~" H 10150 3400 50  0001 C CNN
+F 4 "1276-1028-1-ND" H 10150 3400 50  0001 C CNN "DigiKey P/N"
+F 5 "Samsung Electro-Mechanics" H 10150 3400 50  0001 C CNN "Manufacturer"
+F 6 "CL05B103KB5NNNC" H 10150 3400 50  0001 C CNN "Mfg P/N"
+	1    10150 3400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10150 3300 9800 3300
+Wire Wire Line
+	10150 3500 9800 3500
+Wire Wire Line
+	10450 3300 10150 3300
+Connection ~ 10150 3300
+$Comp
+L power:GND #PWR0122
+U 1 1 5FD19620
+P 10150 3500
+F 0 "#PWR0122" H 10150 3250 50  0001 C CNN
+F 1 "GND" H 10155 3327 50  0000 C CNN
+F 2 "" H 10150 3500 50  0001 C CNN
+F 3 "" H 10150 3500 50  0001 C CNN
+	1    10150 3500
+	1    0    0    -1  
+$EndComp
+Connection ~ 10150 3500
+Text Label 10600 6050 2    50   ~ 0
+CC1_RPUSB
+Text Label 10600 5150 2    50   ~ 0
+CC2_TX_DATA
+Text Label 10600 5250 2    50   ~ 0
+VCONN_ALERT_L
+Text Notes 9700 2750 2    98   ~ 0
+Microcontroller
+$Comp
+L power:PWR_FLAG #FLG0102
+U 1 1 6024CE31
+P 10450 3300
+F 0 "#FLG0102" H 10450 3375 50  0001 C CNN
+F 1 "PWR_FLAG" H 10550 3450 50  0000 C CNN
+F 2 "" H 10450 3300 50  0001 C CNN
+F 3 "~" H 10450 3300 50  0001 C CNN
+	1    10450 3300
+	1    0    0    -1  
+$EndComp
+NoConn ~ 10600 4950
+$Comp
+L Connector:TestPoint TP3
+U 1 1 5FEEFA7D
+P 10600 5550
+F 0 "TP3" V 10600 5800 50  0000 C CNN
+F 1 "TestPoint" V 10704 5622 50  0001 C CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 10800 5550 50  0001 C CNN
+F 3 "~" H 10800 5550 50  0001 C CNN
+F 4 "-" H 10600 5550 50  0001 C CNN "DigiKey P/N"
+F 5 "-" H 10600 5550 50  0001 C CNN "Manufacturer"
+F 6 "-" H 10600 5550 50  0001 C CNN "Mfg P/N"
+	1    10600 5550
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:TestPoint TP2
+U 1 1 5FEEE9C1
+P 10600 5450
+F 0 "TP2" V 10600 5700 50  0000 C CNN
+F 1 "TestPoint" V 10704 5522 50  0001 C CNN
+F 2 "TestPoint:TestPoint_Pad_D1.0mm" H 10800 5450 50  0001 C CNN
+F 3 "~" H 10800 5450 50  0001 C CNN
+F 4 "-" H 10600 5450 50  0001 C CNN "DigiKey P/N"
+F 5 "-" H 10600 5450 50  0001 C CNN "Manufacturer"
+F 6 "-" H 10600 5450 50  0001 C CNN "Mfg P/N"
+	1    10600 5450
+	0    1    1    0   
+$EndComp
+Text Label 10600 5850 2    50   ~ 0
+CC2_RP3A0
+Text Label 10600 5750 2    50   ~ 0
+USB_B_D+
+Wire Wire Line
+	10600 6050 9700 6050
+Wire Wire Line
+	9700 5950 10600 5950
+Wire Wire Line
+	10600 5850 9700 5850
+Wire Wire Line
+	9700 5750 10600 5750
+Text Label 10600 5650 2    50   ~ 0
+USB_B_D-
+Text Label 10600 5550 2    50   ~ 0
+UART_RX
+Text Label 10600 5450 2    50   ~ 0
+UART_TX
+Wire Wire Line
+	10600 5650 9700 5650
+Wire Wire Line
+	9700 5550 10600 5550
+Wire Wire Line
+	10600 5450 9700 5450
+Wire Wire Line
+	9700 5350 10600 5350
+Text Label 10600 5050 2    50   ~ 0
+TX_CLK
+Text Label 10600 4950 2    50   ~ 0
+DAC
+Wire Wire Line
+	10600 5250 9700 5250
+Wire Wire Line
+	9700 5150 10600 5150
+Wire Wire Line
+	10600 5050 9700 5050
+Wire Wire Line
+	9700 4950 10600 4950
+Text Label 10600 4850 2    50   ~ 0
+CC2_BUF
+Text Label 10600 4750 2    50   ~ 0
+CC2_EN
+Text Label 10600 4650 2    50   ~ 0
+CC1_BUF
+Text Label 10600 4550 2    50   ~ 0
+CC1_EN
+Wire Wire Line
+	10600 4850 9700 4850
+Wire Wire Line
+	9700 4750 10600 4750
+Wire Wire Line
+	10600 4650 9700 4650
+Wire Wire Line
+	9700 4550 10600 4550
+Text Label 10600 5350 2    50   ~ 0
+CC2_RA
+Text Label 10600 5950 2    50   ~ 0
+CC1_TX_EN
+Wire Wire Line
+	9800 3300 9800 3150
+$Comp
+L power:GND #PWR0123
+U 1 1 5FD198DB
+P 10250 3050
+F 0 "#PWR0123" H 10250 2800 50  0001 C CNN
+F 1 "GND" H 10255 2877 50  0000 C CNN
+F 2 "" H 10250 3050 50  0001 C CNN
+F 3 "" H 10250 3050 50  0001 C CNN
+	1    10250 3050
+	1    0    0    -1  
+$EndComp
+Connection ~ 10600 3950
+Connection ~ 9200 6250
+$Comp
+L power:GND #PWR0121
+U 1 1 5FD156A7
+P 9200 6250
+F 0 "#PWR0121" H 9200 6000 50  0001 C CNN
+F 1 "GND" H 9205 6077 50  0000 C CNN
+F 2 "" H 9200 6250 50  0001 C CNN
+F 3 "" H 9200 6250 50  0001 C CNN
+	1    9200 6250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9100 6250 9200 6250
+Connection ~ 9100 6250
+Wire Wire Line
+	9000 6250 9100 6250
+Connection ~ 9000 6250
+Wire Wire Line
+	8900 6250 9000 6250
+Connection ~ 9900 2850
+Wire Wire Line
+	9000 2850 9000 3250
+Wire Wire Line
+	9900 2850 9000 2850
+Wire Wire Line
+	9200 3150 9200 3250
+Connection ~ 10250 3750
+Wire Wire Line
+	9700 3250 9300 3250
+Wire Wire Line
+	9700 3750 9700 3250
+Wire Wire Line
+	10250 3750 9700 3750
+Connection ~ 10900 2850
+$Comp
+L power:GND #PWR0120
+U 1 1 5FCC1FA0
+P 10600 3950
+F 0 "#PWR0120" H 10600 3700 50  0001 C CNN
+F 1 "GND" H 10605 3777 50  0000 C CNN
+F 2 "" H 10600 3950 50  0001 C CNN
+F 3 "" H 10600 3950 50  0001 C CNN
+	1    10600 3950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10250 3950 10600 3950
+Wire Wire Line
+	10250 3750 10600 3750
+Connection ~ 10600 3750
+Wire Wire Line
+	10900 3750 10600 3750
+Connection ~ 10600 2850
+Wire Wire Line
+	10900 2850 10600 2850
+Wire Wire Line
+	10900 2800 10900 2850
+$Comp
+L power:+3V3 #PWR0119
+U 1 1 5FC5F0A3
+P 10900 2800
+F 0 "#PWR0119" H 10900 2650 50  0001 C CNN
+F 1 "+3V3" H 10915 2973 50  0000 C CNN
+F 2 "" H 10900 2800 50  0001 C CNN
+F 3 "" H 10900 2800 50  0001 C CNN
+	1    10900 2800
+	1    0    0    -1  
+$EndComp
+Connection ~ 9000 3250
+Wire Wire Line
+	9000 3250 8900 3250
+Wire Wire Line
+	9100 3250 9000 3250
+Connection ~ 10250 3050
+Wire Wire Line
+	9900 3050 10250 3050
+Wire Wire Line
+	10600 3050 10250 3050
+Connection ~ 10250 2850
+Wire Wire Line
+	10250 2850 9900 2850
+Wire Wire Line
+	10600 2850 10250 2850
+$Comp
+L Device:Ferrite_Bead_Small FB2
+U 1 1 5FBAB756
+P 10550 3300
+F 0 "FB2" V 10700 3250 50  0000 C CNN
+F 1 "600@100MHz" V 10800 3350 50  0000 C CNN
+F 2 "Inductor_SMD:L_0402_1005Metric_Pad0.77x0.64mm_HandSolder" V 10480 3300 50  0001 C CNN
+F 3 "~" H 10550 3300 50  0001 C CNN
+F 4 "490-1006-1-ND" H 10550 3300 50  0001 C CNN "DigiKey P/N"
+F 5 "BLM15AG601SN1D" H 10550 3300 50  0001 C CNN "Mfg P/N"
+F 6 "MuRata" H 10550 3300 50  0001 C CNN "Manufacturer"
+	1    10550 3300
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C_Small C8
+U 1 1 5FBA1F59
+P 10600 3850
+F 0 "C8" H 10692 3896 50  0000 L CNN
+F 1 "100n" H 10692 3805 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder" H 10600 3850 50  0001 C CNN
+F 3 "~" H 10600 3850 50  0001 C CNN
+F 4 "1276-6720-1-ND" H 10600 3850 50  0001 C CNN "DigiKey P/N"
+F 5 "Samsung Electro-Mechanics" H 10600 3850 50  0001 C CNN "Manufacturer"
+F 6 "CL05B104KA5NNNC" H 10600 3850 50  0001 C CNN "Mfg P/N"
+	1    10600 3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C7
+U 1 1 5FBA1F4D
+P 10250 3850
+F 0 "C7" H 10342 3896 50  0000 L CNN
+F 1 "4.7u" H 10342 3805 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder" H 10250 3850 50  0001 C CNN
+F 3 "~" H 10250 3850 50  0001 C CNN
+F 4 "1276-1481-1-ND" H 10250 3850 50  0001 C CNN "DigiKey P/N"
+F 5 "Samsung Electro-Mechanics" H 10250 3850 50  0001 C CNN "Manufacturer"
+F 6 "CL05A475KQ5NRNC" H 10250 3850 50  0001 C CNN "Mfg P/N"
+	1    10250 3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C4
+U 1 1 5FB9A628
+P 10600 2950
+F 0 "C4" H 10692 2996 50  0000 L CNN
+F 1 "100n" H 10692 2905 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder" H 10600 2950 50  0001 C CNN
+F 3 "~" H 10600 2950 50  0001 C CNN
+F 4 "1276-6720-1-ND" H 10600 2950 50  0001 C CNN "DigiKey P/N"
+F 5 "Samsung Electro-Mechanics" H 10600 2950 50  0001 C CNN "Manufacturer"
+F 6 "CL05B104KA5NNNC" H 10600 2950 50  0001 C CNN "Mfg P/N"
+	1    10600 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C3
+U 1 1 5FB9A3C4
+P 10250 2950
+F 0 "C3" H 10342 2996 50  0000 L CNN
+F 1 "100n" H 10342 2905 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder" H 10250 2950 50  0001 C CNN
+F 3 "~" H 10250 2950 50  0001 C CNN
+F 4 "1276-6720-1-ND" H 10250 2950 50  0001 C CNN "DigiKey P/N"
+F 5 "Samsung Electro-Mechanics" H 10250 2950 50  0001 C CNN "Manufacturer"
+F 6 "CL05B104KA5NNNC" H 10250 2950 50  0001 C CNN "Mfg P/N"
+	1    10250 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C_Small C2
+U 1 1 5FB990AE
+P 9900 2950
+F 0 "C2" H 9992 2996 50  0000 L CNN
+F 1 "4.7u" H 9992 2905 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0402_1005Metric_Pad0.74x0.62mm_HandSolder" H 9900 2950 50  0001 C CNN
+F 3 "~" H 9900 2950 50  0001 C CNN
+F 4 "1276-1481-1-ND" H 9900 2950 50  0001 C CNN "DigiKey P/N"
+F 5 "Samsung Electro-Mechanics" H 9900 2950 50  0001 C CNN "Manufacturer"
+F 6 "CL05A475KQ5NRNC" H 9900 2950 50  0001 C CNN "Mfg P/N"
+	1    9900 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L MCU_ST_STM32F0:STM32F072CBTx U4
+U 1 1 5F88E97E
+P 9100 4750
+F 0 "U4" H 9100 4700 50  0000 C CNN
+F 1 "STM32F072CB" H 9100 4600 50  0000 C CNN
+F 2 "twonkie:LQFP-48_7x7mm_P0.5mm-QFN48-Frankenstein" H 8600 3350 50  0001 R CNN
+F 3 "" H 9100 4750 50  0001 C CNN
+F 4 "497-18747-1-ND" H 9100 4750 50  0001 C CNN "DigiKey P/N"
+F 5 "STMicro" H 9100 4750 50  0001 C CNN "Manufacturer"
+F 6 "STM32F072CBT" H 9100 4750 50  0001 C CNN "Mfg P/N"
+	1    9100 4750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7500 3850 8400 3850
+Wire Wire Line
+	7500 4650 8400 4650
+Wire Wire Line
+	7500 4750 8400 4750
+Wire Wire Line
+	7500 4850 8400 4850
+Wire Wire Line
+	7500 4950 8400 4950
+Wire Wire Line
+	7500 5050 8400 5050
+Wire Wire Line
+	7500 5350 8400 5350
+Wire Wire Line
+	7500 5450 8400 5450
+Wire Wire Line
+	7500 5650 8400 5650
+Wire Wire Line
+	7500 5850 8400 5850
+Wire Wire Line
+	7500 5950 8400 5950
+Wire Wire Line
+	7500 6050 8400 6050
+Wire Wire Line
+	7500 3450 8400 3450
+Wire Wire Line
+	7500 4350 8400 4350
+Wire Wire Line
+	7500 4250 8400 4250
+Wire Wire Line
+	7500 5550 8400 5550
+Wire Wire Line
+	7500 5750 8400 5750
+Wire Wire Line
+	7400 5150 8400 5150
+Wire Wire Line
+	7100 5250 8400 5250
+Wire Wire Line
+	7500 3650 8400 3650
+Text Notes 7450 3050 0    43   ~ 0
+Dual footprint, will accomodate\nSTM32F072CBT (TQFP48) or\nSTM32F072CBU (QFN48)
 $EndSCHEMATC

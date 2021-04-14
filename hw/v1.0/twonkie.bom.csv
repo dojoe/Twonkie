@@ -1,5 +1,5 @@
 "Source:","D:\Projects\Twonkie\hw\twonkie.sch"
-"Date:","13/02/2021 17:59:06"
+"Date:","14/04/2021 23:39:35"
 "Tool:","Eeschema (5.1.7)-1"
 "Generator:","C:\Progs\Dev\KiCad\bin\scripting\plugins/bom_csv_grouped_by_value.py"
 "Component Count:","54"
@@ -59,7 +59,7 @@
 "","","U1","INA260","Sensor:INA260","Package_SO:TSSOP-16_4.4x5mm_P0.65mm","https://www.analog.com/media/en/technical-documentation/data-sheets/AD8610_8620.pdf","296-47777-1-ND","0x40","TI","INA260AIPWR"
 "","","U2","INA260","Sensor:INA260","Package_SO:TSSOP-16_4.4x5mm_P0.65mm","https://www.analog.com/media/en/technical-documentation/data-sheets/AD8610_8620.pdf","296-47777-1-ND","0x41","TI","INA260AIPWR"
 "","","U3","MIC5504","Regulator_Linear:MIC5504-3.3YM5","Package_TO_SOT_SMD:SOT-23-5_HandSoldering","https://www.analog.com/media/en/technical-documentation/data-sheets/AD8610_8620.pdf","576-4764-1-ND","","Microchip","MIC5504-3.3YM5-TR"
-"","","U4","STM32F072CB","MCU_ST_STM32F0:STM32F042C6Tx","twonkie:LQFP-48_7x7mm_P0.5mm-QFN48-Frankenstein","https://www.analog.com/media/en/technical-documentation/data-sheets/AD8610_8620.pdf","497-19319-1-ND","","STMicro","STM32F042C6T6TR"
+"","","U4","STM32F072CB","MCU_ST_STM32F0:STM32F072CBTx","twonkie:LQFP-48_7x7mm_P0.5mm-QFN48-Frankenstein","","497-18747-1-ND","","STMicro","STM32F072CBT"
 "","","U5","AD8606","Amplifier_Operational:AD8620","Package_SO:MSOP-8_3x3mm_P0.65mm","https://www.analog.com/media/en/technical-documentation/data-sheets/AD8610_8620.pdf","AD8606ARMZREELCT-ND","","Analog Devices","AD8606ARMZ-REEL"
 
 
@@ -92,5 +92,5 @@
 "23","1","SW1","EVQ-P7M01P","Switch:SW_Push","Button_Switch_SMD:SW_SPST_EVQP7C","http://www.apem.com/int/index.php?controller=attachment&id_attachment=1371","P16770CT-ND","","Panasonic","EVQ-P7M01P"
 "24","2","U1, U2","INA260","Sensor:INA260","Package_SO:TSSOP-16_4.4x5mm_P0.65mm","https://www.analog.com/media/en/technical-documentation/data-sheets/AD8610_8620.pdf","296-47777-1-ND","0x40","TI","INA260AIPWR"
 "25","1","U3","MIC5504","Regulator_Linear:MIC5504-3.3YM5","Package_TO_SOT_SMD:SOT-23-5_HandSoldering","https://www.analog.com/media/en/technical-documentation/data-sheets/AD8610_8620.pdf","576-4764-1-ND","","Microchip","MIC5504-3.3YM5-TR"
-"26","1","U4","STM32F072CB","MCU_ST_STM32F0:STM32F042C6Tx","twonkie:LQFP-48_7x7mm_P0.5mm-QFN48-Frankenstein","https://www.analog.com/media/en/technical-documentation/data-sheets/AD8610_8620.pdf","497-19319-1-ND","","STMicro","STM32F042C6T6TR"
+"26","1","U4","STM32F072CB","MCU_ST_STM32F0:STM32F072CBTx","twonkie:LQFP-48_7x7mm_P0.5mm-QFN48-Frankenstein","","497-18747-1-ND","","STMicro","STM32F072CBT"
 "27","1","U5","AD8606","Amplifier_Operational:AD8620","Package_SO:MSOP-8_3x3mm_P0.65mm","https://www.analog.com/media/en/technical-documentation/data-sheets/AD8610_8620.pdf","AD8606ARMZREELCT-ND","","Analog Devices","AD8606ARMZ-REEL"
