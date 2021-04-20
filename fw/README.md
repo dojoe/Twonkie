@@ -72,11 +72,10 @@ Twonkie has a simple console mode using a pair of bulk USB endpoints. In Linux,
 the USB serial driver should support this mode and make the console available as
 `/dev/ttyUSBx`. If that device doesn't show up immediately you can try
 
-  sudo modprobe usbserial
-  echo '18d1 500A' | sudo tee /sys/bus/usb-serial/drivers/generic/new_id
+    sudo modprobe usbserial
+    echo '18d1 500A' | sudo tee /sys/bus/usb-serial/drivers/generic/new_id
 
 ## Windows
 
 For Windows there's a simple USB console program in [util/shell.py](util/shell.py).
 It requires the `libusb1` package from PyPI.
-

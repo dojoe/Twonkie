@@ -80,7 +80,7 @@ If your STM32 is a QFN part, take extra care to inspect its solder joints after 
 |       | R10, R18                   | 1k            |
 |       | R11, R19                   | 12k1          |
 |       | R12, R20                   | 5k11          |
-|       | R6                         | 400           |
+|       | R6, R7                     | 400           |
 |       | R15, R23, R24              | 100           |
 |       | R14, R22                   | 200           |
 | 9     | R1, R8, R13, R16, R21, R27 | 35k7          |
@@ -89,9 +89,7 @@ If your STM32 is a QFN part, take extra care to inspect its solder joints after 
 |       | C5                         | 1u            |
 |       | C6                         | 10n           |
 | 11    | FB2                        | Ferrite Bead  |
-| 12    | DS2                        | LED           |
-| 13    | R7                         | 400           |
-| 14    | DS2, U5, U2, J3, SW1       |               |
+| 12    | DS2, U5, U2, J3, SW1       |               |
 
 ## Part 3: Basic connectivity / bootloader test
 
@@ -169,6 +167,14 @@ Finally you can solder down the shells: Using a soldering iron that can pump out
 
 And that's it! Clean your board with isopropanol and have fun with your new PD sniffer!
 
+### Test 1: Sniff some power supply traffic
+
 For starters, you can open a shell, type `tw trace on` and plug Twonkie in between a PD power supply and sink to watch them negotiate a power contract.
 
-The second test would be to attach only a power supply to Twonkie, with no sink at the other end, and type `tw sink` at the shell to put Twonkie into sink mode. Once in sink mode you can type `tw vbus` to watch what voltage the supply provides, and `pd 0 dev X` will limit the negotiated voltage to a maximum of `X` volts, so you can step through various supply voltages and watch them change. Type `reboot` to go back into sniffer mode.
+A very good test for many of the board devices is to do this in all four possible combinations of input and output plug orientation. The supply and sink should be able to negotiate a contract in all orientations, and Twonkie should be able to trace all of this. If some orientations don't work, check the solder joints on the USB-C connectors for bridges or opens - especially opens can be very sneaky with the haxxy edge mount we're using. If the connectors look alright, check the board devices next - especially the resistor banks and transistors are likely culprits since they directly interact with the USB-C control channels.
+
+### Test 2: Twonkie as sink
+
+The second test would be to attach only a power supply to Twonkie, with no sink at the other end, and type `tw sink` at the shell to put Twonkie into sink mode. (You may have to reconnect to the shell since Twonkie reboots into a different firmware.) Once in sink mode you can type `tw vbus` to watch what voltage the supply provides, and `pd 0 dev X` will limit the negotiated voltage to a maximum of `X` volts, so you can step through various supply voltages and watch them change. Test this in either plug orientation too; if you're having problems here you should double check the resistor banks on the control channels.
+
+To go from sink mode back to sniffer mode you can type `reboot` at the shell.
