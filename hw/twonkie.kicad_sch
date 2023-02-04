@@ -6072,12 +6072,12 @@
     (pin "1" (uuid de791df8-fcd1-4e03-aa3b-7365a5bbca1d))
   )
 
-  (symbol (lib_id "Device:R_Shunt") (at 68.58 78.74 90) (mirror x) (unit 1)
+  (symbol (lib_id "Device:R_Shunt") (at 68.58 78.74 270) (unit 1)
     (in_bom yes) (on_board yes)
     (uuid 00000000-0000-0000-0000-000060b23623)
     (property "Reference" "R28" (id 0) (at 68.58 73.025 90))
     (property "Value" "0.012" (id 1) (at 68.58 75.3364 90))
-    (property "Footprint" "Resistor_SMD:R_Shunt_Ohmite_LVK12" (id 2) (at 68.58 76.962 90)
+    (property "Footprint" "twonkie:R_Shunt_Ohmite_LVK12" (id 2) (at 68.58 76.962 90)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://www.ohmite.com/assets/docs/res_lvk.pdf" (id 3) (at 68.58 78.74 0)
@@ -6136,7 +6136,7 @@
     (uuid 00000000-0000-0000-0000-000060d0f11c)
     (property "Reference" "R29" (id 0) (at 78.74 78.105 90))
     (property "Value" "0.012" (id 1) (at 78.74 80.4164 90))
-    (property "Footprint" "Resistor_SMD:R_Shunt_Ohmite_LVK12" (id 2) (at 78.74 82.042 90)
+    (property "Footprint" "twonkie:R_Shunt_Ohmite_LVK12" (id 2) (at 78.74 82.042 90)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "https://www.ohmite.com/assets/docs/res_lvk.pdf" (id 3) (at 78.74 83.82 0)
@@ -6437,10 +6437,10 @@
       (reference "R27") (unit 1) (value "35k7") (footprint "Resistor_SMD:R_0402_1005Metric_Pad0.72x0.64mm_HandSolder")
     )
     (path "/00000000-0000-0000-0000-000060b23623"
-      (reference "R28") (unit 1) (value "0.012") (footprint "Resistor_SMD:R_Shunt_Ohmite_LVK12")
+      (reference "R28") (unit 1) (value "0.012") (footprint "twonkie:R_Shunt_Ohmite_LVK12")
     )
     (path "/00000000-0000-0000-0000-000060d0f11c"
-      (reference "R29") (unit 1) (value "0.012") (footprint "Resistor_SMD:R_Shunt_Ohmite_LVK12")
+      (reference "R29") (unit 1) (value "0.012") (footprint "twonkie:R_Shunt_Ohmite_LVK12")
     )
     (path "/00000000-0000-0000-0000-00005ff46d11"
       (reference "SW1") (unit 1) (value "EVQ-P7M01P") (footprint "Button_Switch_SMD:SW_SPST_EVQP7C")
