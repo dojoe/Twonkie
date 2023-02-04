@@ -24,20 +24,36 @@ The v1.0 Gerbers in this repo no longer need the botch wires around Q4 either, I
 ## What's changed compared to the original Twinkie?
 
  * A bootloader button in addition to the USB_ID pin based bootloader selection.
- * Uses the INA260 part which has an internal sense resistor, which saves space and routing pains.
+ * Uses the INA237 part which supports the higher supply voltages of USB-PD Extended Power Range (EPR)
  * The microcontroller pins are rearranged for easier routing, so you'll need a different firmware. Binaries are provided and firmware sources that don't need a full ChromeOS build system will follow soon.
  * The USB-C connectors are attached in a hair-raising straddle mount configuration. The way they're soldered to the PCB makes them rock solid though, maybe even more solid than the original Twinkie, and they transfer TB3 20Gbit/s lanes just fine.
 
 ## Sweet! How do I build my own?
 
-I'm glad you asked! Get the board made via the OSH Park link above, or supply the v1.0 Gerbers in this repository to a PCB fab of your choice, get the parts from Digikey or Mouser or what have you, and follow the [Assembly instructions](hw/README.md) to build the device. I recommend ordering a few extra parts: Get one more of each Type-C connector since you're going to modify them in ways that might end up with a broken connector, and generously round up the number of 0402 passives since you're going to drop some of them and you will _never_ find them again :)
+I'm glad you asked! Get the board made via the OSH Park link above, or supply the v2.0 Gerbers in this repository to a PCB fab of your choice, get the parts from Digikey or Mouser or what have you, and follow the [Assembly instructions](hw/README.md) to build the device. I recommend ordering a few extra parts: Get one more of each Type-C connector since you're going to modify them in ways that might end up with a broken connector, and generously round up the number of 0402 passives since you're going to drop some of them and you will _never_ find them again :)
+
+## None of the parts are available 😭 What do I do?
+
+Here are some ideas about replacements for some parts that are most likely to be unavailable. None of these have been tested so you're on your own!
+
+ * **INA237:** The INA237 is part of a device family and has two siblings with higher specs that TI claims are drop-in replacements: INA228 and INA238.
+ * **STM32F072CB:** For one, the Twonkie has a dual footprint that will fit both the TQFP and QFN variants, i.e. the STM32F072CBT and STM32F072CBU. And if you are willing to sacrifice the PD sink functionaliy and only need the sniffer functionality you could also try the variants with 64k flash instead of 128k (STM32F072C8*) and only flash the first half of the firmware binary. Other device families than the F072 would require extensive firmware changes so I can't recommend that.
+ * **USB-C plug / receptacle:** These might be a little trickier. Basically you need one that's meant for being mounted standing up on a board, has all USB-C pins wired out to L shaped pins and doesn't have any metal mounting prongs protruding into the board plane (or if it has you'll have to cut them off).
+
+## I am a noob trying to solder and replicate the Twonkie. Got any beginner tips?
+
+The KiCad schematic file contains the vendor part numbers and DigiKey order numbers for each part designator, and I exported the full list into a .csv file too - those are commonly called "Bill of materials" or BOM for short, and [this is the one for Twonkie 2.0](hw/v2.0/twonkie.bom.csv). You should be able to punch those part numbers into a parts supplier of your choice (I usually use [DigiKey](https://digikey.com/) but there are plenty others) to find the parts you need. If they have parts in stock they'll happily sell you small quantities, though at an increased price. Take care to order more of most parts than you need - especially the tiny passives (resistors, capacitors...) are easy to lose during assembly.
+
+As for reading the schematic, it probably helps to have some familiarity with [USB-PD](https://www.usb.org/document-library/usb-power-delivery) and the [original project description](https://www.chromium.org/chromium-os/twinkie), and then read up on the [device datasheets](ref/) to understand which part does what.
+
+Having said all that, please be warned that the Twonkie is not exactly a noob project - unless you're already familiar with hand-soldering fine pitch SMT parts you may be in for a frustrating experience. Don't let that keep you from trying, but you should know what you're signing up for :)
 
 # TODOs
 
  * [x] [Easy-to-build firmware sources](fw)
  * [x] [Assembly instructions](hw/README.md)
  * [ ] Get Twinkie support upstreamed in sigrok/PulseView
- * [ ] Nicer v1.0 photos
+ * [ ] v2.0 photos
 
 # Similar projects
 
