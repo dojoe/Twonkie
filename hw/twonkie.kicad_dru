@@ -1,0 +1,5 @@
+(version 6)
+(rule crazyedgepads
+    (condition "A.insideCourtyard('J2') || A.insideCourtyard('J1')")
+    (constraint edge_clearance(min -1mm))
+)
