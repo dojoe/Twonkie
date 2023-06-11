@@ -226,6 +226,12 @@ void i2c_set_timeout(int port, uint32_t timeout);
 int i2c_read32(int port, int slave_addr, int offset, int *data);
 
 /**
+ * Read a 24-bit register from the slave at 8-bit slave address <slaveaddr>, at
+ * the specified 8-bit <offset> in the slave's address space.
+ */
+int i2c_read24(int port, int slave_addr, int offset, int *data);
+
+/**
  * Write a 32-bit register to the slave at 8-bit slave address <slaveaddr>, at
  * the specified 8-bit <offset> in the slave's address space.
  */

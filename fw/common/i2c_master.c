@@ -125,10 +125,33 @@ int i2c_read32(int port, int slave_addr, int offset, int *data)
 
 	if (slave_addr & I2C_FLAG_BIG_ENDIAN)
 		*data = ((int)buf[0] << 24) | ((int)buf[1] << 16) |
-			((int)buf[0] << 8) | buf[1];
+			((int)buf[2] << 8) | buf[3];
 	else
 		*data = ((int)buf[3] << 24) | ((int)buf[2] << 16) |
 			((int)buf[1] << 8) | buf[0];
+
+	return EC_SUCCESS;
+}
+
+int i2c_read24(int port, int slave_addr, int offset, int *data)
+{
+	int rv;
+	uint8_t reg, buf[3];
+
+	reg = offset & 0xff;
+	/* I2C read 32-bit word: transmit 8-bit offset, and read 32bits */
+	i2c_lock(port, 1);
+	rv = i2c_xfer(port, slave_addr, &reg, 1, buf, 3,
+		      I2C_XFER_SINGLE);
+	i2c_lock(port, 0);
+
+	if (rv)
+		return rv;
+
+	if (slave_addr & I2C_FLAG_BIG_ENDIAN)
+		*data = ((int)buf[0] << 16) | ((int)buf[1] << 8) | buf[2];
+	else
+		*data = ((int)buf[2] << 16) | ((int)buf[1] << 8) | buf[0];
 
 	return EC_SUCCESS;
 }

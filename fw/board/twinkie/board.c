@@ -48,14 +48,30 @@ void board_config_pre_init(void)
 
 static void board_init(void)
 {
+	const uint16_t calib = INA2XX_CALIB_1MA(INA_SENSE_MOHMS);
+	const uint32_t vbus_mode =
+		INA2XX_CONFIG_BUS_CONV_TIME(INA2XX_CONV_TIME_1100) |
+		INA2XX_CONFIG_SHUNT_CONV_TIME(INA2XX_CONV_TIME_1100) |
+		INA2XX_CONFIG_MODE_BUS | INA2XX_CONFIG_MODE_SHUNT |
+		INA2XX_CONFIG_MODE_CONT;
+	const uint32_t vconn_mode =
+		INA2XX_CONFIG_BUS_CONV_TIME(INA2XX_CONV_TIME_1100) |
+		INA2XX_CONFIG_SHUNT_CONV_TIME(INA2XX_CONV_TIME_1100) |
+		INA2XX_CONFIG_MODE_BUS | INA2XX_CONFIG_MODE_SHUNT |
+		/* Disable INA1 (VCONN2) to avoid leaking current */
+		INA2XX_CONFIG_MODE_TRG;
+
+#ifdef BOARD_TWONKIEV2
+	// INA1 address tied to 5 instead of 1 for easier board routing :/
+	ina2xx_addresses[1] = INA2XX_I2C_ADDR(5);
+#endif
+
 	/* Enable interrupts for INAs. */
 	gpio_enable_interrupt(GPIO_CC2_ALERT_L);
 	gpio_enable_interrupt(GPIO_VBUS_ALERT_L);
 
-	/* Calibrate INA0 (VBUS) with 1mA/LSB scale */
-	ina2xx_init(0, 0x8000, INA2XX_CALIB_1MA(INA_SENSE_MOHMS));
-	/* Disable INA1 (VCONN2) to avoid leaking current */
-	ina2xx_init(1, 0, INA2XX_CALIB_1MA(INA_SENSE_MOHMS));
+	ina2xx_init(0, vbus_mode, calib);
+	ina2xx_init(1, vconn_mode, calib);
 }
 DECLARE_HOOK(HOOK_INIT, board_init, HOOK_PRIO_DEFAULT);
 

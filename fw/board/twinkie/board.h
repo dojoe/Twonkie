@@ -49,7 +49,13 @@
 #define CONFIG_CMD_USB_PD_PE
 #define CONFIG_I2C
 #define CONFIG_I2C_MASTER
+#if defined(BOARD_TWONKIEV2)
+#define CONFIG_INA237
+#elif defined(BOARD_TWONKIE)
+#define CONFIG_INA260
+#else /* BOARD_TWINKIE */
 #define CONFIG_INA231
+#endif
 #undef CONFIG_WATCHDOG_HELP
 #undef CONFIG_LID_SWITCH
 #undef CONFIG_TASK_PROFILING
@@ -154,7 +160,9 @@ enum usb_strings {
 #define USB_IFACE_COUNT   2
 #endif
 
-#ifdef BOARD_TWONKIE
+#if defined(BOARD_TWONKIEV2)
+#define INA_SENSE_MOHMS 12
+#elif defined(BOARD_TWONKIE)
 #define INA_SENSE_MOHMS 2   /* that's mOhms not MOhms */
 #else /* Twinkie */
 #define INA_SENSE_MOHMS 15

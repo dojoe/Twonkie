@@ -55,7 +55,7 @@ driver-$(CONFIG_CHARGER_ISL9238)+=charger/isl923x.o
 driver-$(CONFIG_IO_EXPANDER_PCA9534)+=ioexpander_pca9534.o
 
 # Current/Power monitor
-driver-$(CONFIG_INA219)$(CONFIG_INA231)+=ina2xx.o
+driver-$(CONFIG_INA219)$(CONFIG_INA231)$(CONFIG_INA237)$(CONFIG_INA260)+=ina2xx.o
 
 # Power Management IC
 driver-$(CONFIG_PMU_TPS65090)+=pmu_tps65090.o

@@ -133,8 +133,7 @@ static inline void pd_tx_init(void)
 
 #ifndef CONFIG_USB_PD_TX_PHY_ONLY
 	/* Detect when VBUS crosses the 4.5V threshold (1.25mV/bit) */
-	ina2xx_write(0, INA2XX_REG_ALERT, 4500 * 100 / 125);
-	ina2xx_write(0, INA2XX_REG_MASK, INA2XX_MASK_EN_BOL);
+	ina2xx_set_vbus_ov_limit(0, INA2XX_MV_BUS(4500));
 	/* start as a power consumer */
 	gpio_set_level(GPIO_CC1_RD, 0);
 	gpio_set_level(GPIO_CC2_RD, 0);
