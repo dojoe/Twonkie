@@ -25,7 +25,7 @@ The v1.0 and v2.0 Gerbers in this repo no longer need the botch wires around Q4 
 
  * A bootloader button in addition to the USB_ID pin based bootloader selection.
  * Uses the INA237 part which supports the higher supply voltages of USB-PD Extended Power Range (EPR)
- * The microcontroller pins are rearranged for easier routing, so you'll need a different firmware. Binaries are provided and firmware sources that don't need a full ChromeOS build system will follow soon.
+ * The microcontroller pins are rearranged for easier routing, so you'll need a different firmware. Binaries are provided and the firmware is easy to build from source.
  * The USB-C connectors are attached in a hair-raising straddle mount configuration. The way they're soldered to the PCB makes them rock solid though, maybe even more solid than the original Twinkie, and they transfer TB3 20Gbit/s lanes just fine.
 
 ## I see there's a v2.0 now - what's different?
