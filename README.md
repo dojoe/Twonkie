@@ -19,7 +19,7 @@ The PCB is exactly 1 inch squared, so $10 will get you three at OSHPark. In fact
 
 _(Disclaimer: I am not affiliated with OSHPark, I just love their service to bits and they've been super helpful chaps time and time again.)_
 
-The v1.0 Gerbers in this repo no longer need the botch wires around Q4 either, I'll update the photo as soon as I get the next board revision back.
+The v1.0 and v2.0 Gerbers in this repo no longer need the botch wires around Q4 either, I'll update the photo as soon as I get the next board revision back.
 
 ## What's changed compared to the original Twinkie?
 
@@ -27,6 +27,10 @@ The v1.0 Gerbers in this repo no longer need the botch wires around Q4 either, I
  * Uses the INA237 part which supports the higher supply voltages of USB-PD Extended Power Range (EPR)
  * The microcontroller pins are rearranged for easier routing, so you'll need a different firmware. Binaries are provided and firmware sources that don't need a full ChromeOS build system will follow soon.
  * The USB-C connectors are attached in a hair-raising straddle mount configuration. The way they're soldered to the PCB makes them rock solid though, maybe even more solid than the original Twinkie, and they transfer TB3 20Gbit/s lanes just fine.
+
+## I see there's a v2.0 now - what's different?
+
+The 2.0 version uses a different voltage/current monitor chip compared to Twonkie v1.0, the [INA237](ref/ina237.pdf), which supports higher bus voltages and therefore makes the Twonkie hardware ready for Extended Power Range (EPR). The INA260 used by Twonkie v1.0 (and the INA231 used by Twinkie) will take damage if subjected to the up to 48V specified by EPR.
 
 ## Sweet! How do I build my own?
 
@@ -50,8 +54,6 @@ Having said all that, please be warned that the Twonkie is not exactly a noob pr
 
 # TODOs
 
- * [x] [Easy-to-build firmware sources](fw)
- * [x] [Assembly instructions](hw/README.md)
  * [ ] Get Twinkie support upstreamed in sigrok/PulseView
  * [ ] v2.0 photos
 

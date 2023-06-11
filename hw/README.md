@@ -58,18 +58,18 @@ We start on the back side because that's where the STM32 sits which is the most 
 
 If your STM32 is a QFN part, take extra care to inspect its solder joints after you put it down. Once the board is fully populated any bad solder joints here will be hard to fix.
 
-| Group | Components     | Value        |
-|-------|----------------|--------------|
-| 1     | U4             | STM32        |
-| 2     | R3             | 400          |
-|       | R2, R5         | 620          |
-| 3     | DS1            | LED          |
-| 4     | C3, C8, C9     | 100n         |
-|       | C7             | 4.7µ         |
-|       | C1             | 1µ           |
-|       | R4             | 400          |
-|       | FB1            | Ferrite Bead |
-| 5     | D1, U1, U3, Q4 |              |
+| Group | Components          | Value        |
+|-------|---------------------|--------------|
+| 1     | U4                  | STM32        |
+| 2     | R3                  | 400          |
+|       | R2, R5              | 620          |
+| 3     | DS1                 | LED          |
+| 4     | C3, C8              | 100n         |
+|       | C7                  | 4.7µ         |
+|       | C1                  | 1µ           |
+|       | R4                  | 400          |
+|       | FB1                 | Ferrite Bead |
+| 5     | D1, U1, U3, Q4, R28 |              |
 
 ## Part 2: Front side
 
@@ -85,11 +85,11 @@ If your STM32 is a QFN part, take extra care to inspect its solder joints after 
 |       | R14, R22                   | 200           |
 | 9     | R1, R8, R13, R16, R21, R27 | 35k7          |
 | 10    | C2                         | 4u7           |
-|       | C4                         | 100n          |
+|       | C4, C9                     | 100n          |
 |       | C5                         | 1u            |
 |       | C6                         | 10n           |
 | 11    | FB2                        | Ferrite Bead  |
-| 12    | DS2, U5, U2, J3, SW1       |               |
+| 12    | DS2, U5, U2, J3, SW1, R29  |               |
 
 ## Part 3: Basic connectivity / bootloader test
 
