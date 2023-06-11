@@ -5,7 +5,14 @@
 # Embedded Controller firmware build system
 #
 
-BOARD ?= twonkie
+ifndef BOARD
+$(warning Please specify a board to build for via the BOARD=<board> variable.)
+$(warning Options:)
+$(warning .   BOARD=twinkie   - OG Twinkie)
+$(warning .   BOARD=twonkie   - Twonkie v1)
+$(warning .   BOARD=twonkiev2 - Twonkie v2)
+$(error Missing BOARD)
+endif
 
 # Directory where the board is configured (includes /$(BOARD) at the end)
 BDIR:=$(wildcard board/$(BOARD) private-*/board/$(BOARD))
