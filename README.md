@@ -36,6 +36,8 @@ The 2.0 version uses a different voltage/current monitor chip compared to Twonki
 
 I'm glad you asked! Get the board made via the OSH Park link above, or supply the v2.0 Gerbers in this repository to a PCB fab of your choice, get the parts from Digikey or Mouser or what have you, and follow the [Assembly instructions](hw/README.md) to build the device. I recommend ordering a few extra parts: Get one more of each Type-C connector since you're going to modify them in ways that might end up with a broken connector, and generously round up the number of 0402 passives since you're going to drop some of them and you will _never_ find them again :)
 
+For the firmware, there are [Instructions for building and flashing](fw/README.md) in the [fw](fw) directory.
+
 ## None of the parts are available 😭 What do I do?
 
 Here are some ideas about replacements for some parts that are most likely to be unavailable. None of these have been tested so you're on your own!

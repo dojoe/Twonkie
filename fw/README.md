@@ -13,17 +13,14 @@ to build the firmware and not much else.
 
 ## Building the Twonkie firmware
 
-`make -j`
+ * `make -j BOARD=twonkie`  for Twonkie v1 hardware
+ * `make -j BOARD=twonkiev2`  for Twonkie v2 hardware
+ * `make -j BOARD=twinkie`  for the original Twinkie
 
-The completed firmware will end up in `build/twonkie/ec.bin` and can be flashed
+The completed firmware will end up in `build/<BOARD>/ec.bin` and can be flashed
 as is.
 
-## Building the Twinkie firmware
-
-`make -j BOARD=twinkie`
-
-The completed firmware will end up in `build/twinkie/ec.bin` and can be flashed
-as is.
+Or you can run `buildall.sh` to build all three images.
 
 ## Pre-built firmware
 

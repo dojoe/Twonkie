@@ -105,6 +105,7 @@ This step is done on the not-quite-finished Twonkie because if anything isn't ri
 4. Hold down the bootloader switch and plug the dongle in via the Micro-B connector.
    It should now enumerate as the bootloader (VID 0x0483, PID 0xDF11, "STM32 BOOTLOADER")
 5. Flash the firmware via the bootloader, then unplug and plug back in to boot the Twonkie firmware.
+   * Check out the [Firmware README](../fw/README.md) for building and flashing instructions.
 6. You can test the LED using the serial shell:
    * `tw sink` puts the device into sink mode where the firmware doesn't keep overwriting the LED state.
      You may need to reconnect the shell after this.
