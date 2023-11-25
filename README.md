@@ -62,7 +62,8 @@ Having said all that, please be warned that the Twonkie is not exactly a noob pr
 # Similar projects
 
  * As luck would have it, [Greg Davill](https://github.com/gregdavill) started a project with the exact same goal at a very similar time, so there's now two of us :) https://github.com/gregdavill/PD-sniffer
-
+ * [XenGi](https://github.com/XenGi) built a version of Twonkie v2.0 which uses a 0.8mm PCB and industry-standard straddle mount USB-C connectors. After [a bit of deliberation](https://github.com/dojoe/Twonkie/issues/10) I decided to stick with the 1.6mm PCB for stability and availability reasons but if you prefer a less haxxy way of attaching the connectors (and a 3D printed case!) feel free to check out his repo: https://gitlab.com/XenGi/Twonkie
+   
 # Licenses
 
 ## Hardware (as found in the `hw` subdirectory)
