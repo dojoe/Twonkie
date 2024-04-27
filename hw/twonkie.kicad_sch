@@ -6056,7 +6056,7 @@
     (property "Datasheet" "https://www.ti.com/lit/ds/symlink/ina237.pdf" (id 3) (at 88.9 154.94 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "I2C addr" "0x43" (id 4) (at 83.82 154.94 90)
+    (property "I2C addr" "0x45" (id 4) (at 83.82 154.94 90)
       (effects (font (size 1.27 1.27)) (justify right))
     )
     (property "DigiKey P/N" "296-INA237AIDGSRCT-ND" (id 5) (at 86.36 154.94 0)
