@@ -1,4 +1,4 @@
-# Twonkie - a USB-PD sniffer based on Google's [Twinkie](https://www.chromium.org/chromium-os/twinkie)
+# Twonkie - a USB-PD sniffer based on Google's [Twinkie](https://www.chromium.org/chromium-os/developer-library/guides/hardware-schematics/twinkie/)
 
 Twonkie is a USB-PD sniffer/injector/sink based on a Google project called Twinkie, re-engineered to be made in one-off quantities by mere mortals.
 
@@ -50,7 +50,7 @@ Here are some ideas about replacements for some parts that are most likely to be
 
 The KiCad schematic file contains the vendor part numbers and DigiKey order numbers for each part designator, and I exported the full list into a .csv file too - those are commonly called "Bill of materials" or BOM for short, and [this is the one for Twonkie 2.0](hw/v2.0/twonkie.bom.csv). You should be able to punch those part numbers into a parts supplier of your choice (I usually use [DigiKey](https://digikey.com/) but there are plenty others) to find the parts you need. If they have parts in stock they'll happily sell you small quantities, though at an increased price. Take care to order more of most parts than you need - especially the tiny passives (resistors, capacitors...) are easy to lose during assembly.
 
-As for reading the schematic, it probably helps to have some familiarity with [USB-PD](https://www.usb.org/document-library/usb-power-delivery) and the [original project description](https://www.chromium.org/chromium-os/twinkie), and then read up on the [device datasheets](ref/) to understand which part does what.
+As for reading the schematic, it probably helps to have some familiarity with [USB-PD](https://www.usb.org/document-library/usb-power-delivery) and the [original project description](https://www.chromium.org/chromium-os/developer-library/guides/hardware-schematics/twinkie/), and then read up on the [device datasheets](ref/) to understand which part does what.
 
 Having said all that, please be warned that the Twonkie is not exactly a noob project - unless you're already familiar with hand-soldering fine pitch SMT parts you may be in for a frustrating experience. Don't let that keep you from trying, but you should know what you're signing up for :)
 
