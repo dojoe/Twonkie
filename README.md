@@ -15,7 +15,7 @@ Lookie here!
 
 The PCB is exactly 1 inch squared, so $10 will get you three at OSHPark. In fact, let me take care of that for you:
 
-<a href="https://oshpark.com/shared_projects/VxczZuoj"><img src="https://oshpark.com/packs/media/images/badge-5f4e3bf4bf68f72ff88bd92e0089e9cf.png" alt="Order from OSH Park"></img></a>
+<a href="https://oshpark.com/shared_projects/pj6N7ZkZ"><img src="https://oshpark.com/packs/media/images/badge-5f4e3bf4bf68f72ff88bd92e0089e9cf.png" alt="Order from OSH Park"></img></a>
 
 _(Disclaimer: I am not affiliated with OSHPark, I just love their service to bits and they've been super helpful chaps time and time again.)_
 
